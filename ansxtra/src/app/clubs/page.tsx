@@ -1,10 +1,3 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import { Club } from '../../types';
-import { getFilteredClubs, getAvailableCategories } from '../../lib/data';
-import ClubCard from '../../components/ClubCard';
-
 export default function ClubsPage() {
   const clubs = [
     {
