@@ -124,7 +124,7 @@ export default function AuthPage() {
         {/* Footer Links */}
         <div className="text-center space-y-4">
           <p className="text-sm text-neutral-500">
-            Don't have access?{' '}
+            Don&apos;t have access?{' '}
             <a href="#" className="font-semibold text-primary-600 hover:text-primary-700 transition-colors">
               Contact your school administrator
             </a>
