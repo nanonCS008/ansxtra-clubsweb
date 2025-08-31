@@ -29,30 +29,30 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-white to-pink-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-neutral-50 via-white to-primary-50/30 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         {/* Header */}
         <div className="text-center">
-          <div className="mx-auto h-20 w-20 bg-gradient-to-br from-pink-500 via-purple-600 to-blue-500 rounded-2xl flex items-center justify-center shadow-xl mb-6">
-            <span className="text-white font-bold text-3xl">A</span>
+          <div className="mx-auto h-24 w-24 bg-gradient-to-br from-primary-500 via-secondary-500 to-accent-500 rounded-3xl flex items-center justify-center shadow-large mb-8">
+            <span className="text-white font-bold text-4xl">A</span>
           </div>
-          <h2 className="text-4xl font-bold text-gray-900 mb-2">
+          <h2 className="text-4xl font-bold text-neutral-900 mb-4">
             Welcome Back
           </h2>
-          <p className="text-lg text-gray-600">
-            Sign in to access your extracurricular dashboard
+          <p className="text-lg text-neutral-600 leading-relaxed">
+            Sign in to access your extracurricular dashboard and manage your club applications
           </p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="email" className="block text-sm font-semibold text-neutral-700 mb-3">
               School Email Address
             </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="relative group">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <svg className="w-5 h-5 text-neutral-400 group-focus-within:text-primary-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                 </svg>
               </div>
@@ -65,20 +65,20 @@ export default function AuthPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="650123@student.amnuaysilpa.ac.th"
-                className="appearance-none rounded-xl relative block w-full pl-10 pr-3 py-4 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 focus:z-10 text-base transition-all duration-300"
+                className="appearance-none rounded-2xl relative block w-full pl-12 pr-4 py-4 border border-neutral-200 placeholder-neutral-400 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 focus:z-10 text-base transition-all duration-300 bg-neutral-50 focus:bg-white shadow-soft"
               />
             </div>
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-3 text-sm text-neutral-500">
               Use your school email address to access ANSxtra
             </p>
           </div>
 
           {/* Message */}
           {message && (
-            <div className={`p-4 rounded-xl text-sm ${
+            <div className={`p-4 rounded-2xl text-sm border ${
               message.includes('successful') 
-                ? 'bg-green-50 text-green-800 border border-green-200' 
-                : 'bg-red-50 text-red-800 border border-red-200'
+                ? 'bg-green-50 text-green-800 border-green-200' 
+                : 'bg-red-50 text-red-800 border-red-200'
             }`}>
               {message}
             </div>
@@ -89,41 +89,54 @@ export default function AuthPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative w-full flex justify-center py-4 px-6 border border-transparent text-base font-semibold rounded-xl text-white bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 focus:outline-none focus:ring-4 focus:ring-pink-500/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105"
+              className="group relative w-full flex justify-center py-4 px-6 border border-transparent text-base font-semibold rounded-2xl text-white bg-gradient-to-r from-primary-500 to-secondary-500 hover:from-primary-600 hover:to-secondary-600 focus:outline-none focus:ring-4 focus:ring-primary-500/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 shadow-medium hover:shadow-glow"
             >
               {isLoading ? (
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-3">
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
                   <span>Signing in...</span>
                 </div>
               ) : (
-                'Sign In'
+                <span className="flex items-center space-x-2">
+                  <span>Sign In</span>
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
               )}
             </button>
           </div>
         </form>
 
         {/* Demo Account Info */}
-        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-200">
-          <h3 className="text-sm font-semibold text-blue-900 mb-2">Demo Account</h3>
-          <p className="text-sm text-blue-700 mb-2">
-            Try logging in with this demo student account:
+        <div className="bg-gradient-to-r from-accent-50 to-secondary-50 rounded-2xl p-6 border border-accent-200">
+          <h3 className="text-sm font-semibold text-accent-900 mb-3">Demo Account</h3>
+          <p className="text-sm text-accent-700 mb-4 leading-relaxed">
+            Try logging in with this demo student account to explore the platform:
           </p>
-          <div className="bg-white rounded-lg p-3 border border-blue-200">
-            <p className="text-sm font-mono text-blue-800">
+          <div className="bg-white rounded-xl p-4 border border-accent-200 shadow-soft">
+            <p className="text-sm font-mono text-accent-800 text-center">
               650123@student.amnuaysilpa.ac.th
             </p>
           </div>
         </div>
 
         {/* Footer Links */}
-        <div className="text-center">
-          <p className="text-sm text-gray-500">
+        <div className="text-center space-y-4">
+          <p className="text-sm text-neutral-500">
             Don't have access?{' '}
-            <a href="#" className="font-medium text-pink-600 hover:text-pink-500 transition-colors">
+            <a href="#" className="font-semibold text-primary-600 hover:text-primary-700 transition-colors">
               Contact your school administrator
             </a>
           </p>
+          <div className="flex justify-center space-x-6">
+            <a href="/clubs" className="text-sm text-neutral-500 hover:text-primary-600 transition-colors">
+              Browse Clubs
+            </a>
+            <a href="#" className="text-sm text-neutral-500 hover:text-primary-600 transition-colors">
+              Help Center
+            </a>
+          </div>
         </div>
       </div>
     </div>
