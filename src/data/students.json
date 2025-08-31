@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "email": "650123@student.amnuaysilpa.ac.th",
+    "studentId": "650123",
+    "fullName": "Pattaraporn Srisai",
+    "grade": "12",
+    "applications": [
+      {
+        "id": "1",
+        "clubId": "3",
+        "clubName": "Model United Nations",
+        "clubSlug": "model-united-nations",
+        "status": "In Review",
+        "submittedAt": "2024-01-15T10:30:00Z",
+        "reason": "I am passionate about international relations and want to develop my public speaking and diplomatic skills. I believe MUN will help me understand global issues better and prepare me for future studies in political science.",
+        "fullName": "Pattaraporn Srisai",
+        "grade": "12"
+      }
+    ],
+    "memberships": []
+  }
+]

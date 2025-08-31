@@ -1,0 +1,177 @@
+[
+  {
+    "id": "1",
+    "slug": "unicef-ambassadors",
+    "name": "UNICEF Ambassadors",
+    "description": "A student-led initiative focused on promoting children's rights and humanitarian values. Members participate in awareness campaigns, fundraising events, and community service projects that support UNICEF's mission to protect and advocate for children worldwide.",
+    "shortDescription": "Promoting children's rights and humanitarian values through awareness campaigns and community service.",
+    "tags": ["Service", "Leadership"],
+    "type": "student_led",
+    "isOpen": true,
+    "memberCount": 15,
+    "coverImageUrl": "/images/unicef-cover.jpg",
+    "meetingInfo": "Every Tuesday, 3:30 PM - 5:00 PM",
+    "advisors": ["Ms. Sarah Johnson"],
+    "leaders": ["Pimchanok Srisai", "Thanakorn Pongprapan"],
+    "events": [
+      {
+        "id": "1",
+        "title": "Children's Rights Awareness Week",
+        "date": "2024-02-15",
+        "description": "Week-long campaign to raise awareness about children's rights in our community"
+      },
+      {
+        "id": "2",
+        "title": "UNICEF Fundraising Gala",
+        "date": "2024-03-20",
+        "description": "Annual fundraising event to support UNICEF's global programs"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "slug": "interact-club",
+    "name": "Interact Club",
+    "description": "A Rotary-sponsored service club for young people aged 12-18. Members develop leadership skills while working on local and international community service projects. The club focuses on developing leadership skills, personal integrity, helpfulness, respect for others, and international understanding.",
+    "shortDescription": "Rotary-sponsored service club developing leadership skills through community service projects.",
+    "tags": ["Service", "Leadership"],
+    "type": "student_led",
+    "isOpen": true,
+    "memberCount": 22,
+    "coverImageUrl": "/images/interact-cover.jpg",
+    "meetingInfo": "Every Thursday, 4:00 PM - 5:30 PM",
+    "advisors": ["Mr. David Chen"],
+    "leaders": ["Nattapong Wongsa", "Supawadee Rattanapong"],
+    "events": [
+      {
+        "id": "1",
+        "title": "Community Clean-up Day",
+        "date": "2024-02-10",
+        "description": "Volunteer event to clean up local parks and streets"
+      },
+      {
+        "id": "2",
+        "title": "International Youth Exchange",
+        "date": "2024-04-15",
+        "description": "Cultural exchange program with students from partner schools"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "slug": "model-united-nations",
+    "name": "Model United Nations",
+    "name": "Model United Nations",
+    "description": "Students simulate United Nations committees and debate current global issues. Participants develop research, public speaking, and diplomatic skills while learning about international relations, current events, and the UN system. The club regularly participates in regional and national MUN conferences.",
+    "shortDescription": "Simulate UN committees and debate global issues while developing diplomatic and public speaking skills.",
+    "tags": ["Academic", "Competition", "Leadership"],
+    "type": "student_led",
+    "isOpen": true,
+    "memberCount": 18,
+    "coverImageUrl": "/images/mun-cover.jpg",
+    "meetingInfo": "Every Monday, 3:00 PM - 5:00 PM",
+    "advisors": ["Dr. Maria Rodriguez"],
+    "leaders": ["Pattaraporn Srisai", "Kittisak Pongprapan"],
+    "events": [
+      {
+        "id": "1",
+        "title": "Bangkok MUN Conference",
+        "date": "2024-02-25",
+        "description": "Regional Model UN conference with schools from across Bangkok"
+      },
+      {
+        "id": "2",
+        "title": "Internal MUN Simulation",
+        "date": "2024-03-10",
+        "description": "Practice session for upcoming external conferences"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "slug": "moot-court",
+    "name": "Moot Court",
+    "description": "Students participate in simulated court proceedings, arguing legal cases before mock judges. This competitive program develops critical thinking, legal reasoning, and public speaking skills. Members learn about constitutional law, civil rights, and the judicial system through hands-on experience.",
+    "shortDescription": "Simulate court proceedings and develop legal reasoning skills through competitive mock trials.",
+    "tags": ["Academic", "Competition", "Leadership"],
+    "type": "student_led",
+    "isOpen": true,
+    "memberCount": 12,
+    "coverImageUrl": "/images/moot-court-cover.jpg",
+    "meetingInfo": "Every Wednesday, 3:30 PM - 5:30 PM",
+    "advisors": ["Prof. James Wilson"],
+    "leaders": ["Ratchanon Srisai", "Pattaraporn Pongprapan"],
+    "events": [
+      {
+        "id": "1",
+        "title": "National Moot Court Competition",
+        "date": "2024-03-05",
+        "description": "Annual competition against other schools nationwide"
+      },
+      {
+        "id": "2",
+        "title": "Legal Workshop Series",
+        "date": "2024-02-20",
+        "description": "Workshop on constitutional law and civil rights"
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "slug": "operation-smile",
+    "name": "Operation Smile",
+    "description": "A global medical charity that provides free surgeries for children born with cleft lip, cleft palate, and other facial deformities. Student members organize fundraising events, awareness campaigns, and volunteer opportunities to support the organization's mission of transforming lives through safe surgery.",
+    "shortDescription": "Support children with facial deformities through fundraising and awareness campaigns for free surgeries.",
+    "tags": ["Service", "Leadership"],
+    "type": "student_led",
+    "isOpen": true,
+    "memberCount": 20,
+    "coverImageUrl": "/images/operation-smile-cover.jpg",
+    "meetingInfo": "Every Friday, 3:00 PM - 4:30 PM",
+    "advisors": ["Ms. Lisa Thompson"],
+    "leaders": ["Nattapong Srisai", "Supawadee Pongprapan"],
+    "events": [
+      {
+        "id": "1",
+        "title": "Smile Gala Fundraiser",
+        "date": "2024-03-15",
+        "description": "Annual fundraising gala to support Operation Smile's medical missions"
+      },
+      {
+        "id": "2",
+        "title": "Awareness Campaign",
+        "date": "2024-02-28",
+        "description": "School-wide campaign to educate about cleft conditions"
+      }
+    ]
+  },
+  {
+    "id": "6",
+    "slug": "sports-club",
+    "name": "Sports Club",
+    "description": "A teacher-led program offering various sports activities and training sessions. Students can participate in basketball, volleyball, swimming, and track & field. The club focuses on physical fitness, teamwork, and sportsmanship while preparing students for school competitions and tournaments.",
+    "shortDescription": "Teacher-led sports program offering basketball, volleyball, swimming, and track & field training.",
+    "tags": ["Sports", "Leadership"],
+    "type": "teacher_led",
+    "isOpen": false,
+    "memberCount": 35,
+    "coverImageUrl": "/images/sports-cover.jpg",
+    "meetingInfo": "Every Monday, Wednesday, Friday, 4:00 PM - 6:00 PM",
+    "advisors": ["Coach Somchai Pongprapan"],
+    "leaders": ["Coach Somchai Pongprapan"],
+    "events": [
+      {
+        "id": "1",
+        "title": "Inter-School Sports Tournament",
+        "date": "2024-04-10",
+        "description": "Annual competition against other schools in the district"
+      },
+      {
+        "id": "2",
+        "title": "Sports Day",
+        "date": "2024-03-25",
+        "description": "School-wide sports celebration and friendly competitions"
+      }
+    ]
+  }
+]
