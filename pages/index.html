@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ANSXtra - Amnuaysilpa Extracurricular Portal</title>
+  <meta name="description" content="Discover and join extracurricular clubs at Amnuaysilpa School">
+  <link rel="icon" type="image/png" href="/public/logo.png">
+  <link rel="stylesheet" href="/styles/globals.css">
+  <style>
+    /* Hero Section */
+    .hero {
+      background: var(--gradient-hero);
+      color: var(--color-white);
+      padding: var(--space-20) 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: float 20s infinite ease-in-out;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(-30px, -30px) rotate(180deg); }
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero-logo {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto var(--space-6);
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+    }
+    
+    .hero h1 {
+      color: var(--color-white);
+      font-size: var(--text-5xl);
+      margin-bottom: var(--space-4);
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .hero-subtitle {
+      font-size: var(--text-xl);
+      opacity: 0.95;
+      margin-bottom: var(--space-8);
+    }
+    
+    .hero-actions {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .hero-search {
+      background: var(--color-white);
+      border-radius: var(--radius-full);
+      padding: var(--space-2);
+      display: flex;
+      align-items: center;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .hero-search input {
+      border: none;
+      background: none;
+      padding: var(--space-3) var(--space-4);
+      flex: 1;
+      font-size: var(--text-lg);
+    }
+    
+    .hero-search input:focus {
+      outline: none;
+      box-shadow: none;
+    }
+    
+    .hero-search button {
+      background: var(--gradient-primary);
+      color: var(--color-white);
+      border: none;
+      border-radius: var(--radius-full);
+      padding: var(--space-3) var(--space-6);
+      font-weight: var(--font-semibold);
+      cursor: pointer;
+      transition: transform var(--transition-fast);
+    }
+    
+    .hero-search button:hover {
+      transform: scale(1.05);
+    }
+    
+    /* Stats Section */
+    .stats {
+      background: var(--color-gray-50);
+      padding: var(--space-12) 0;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-6);
+      text-align: center;
+    }
+    
+    .stat-card {
+      background: var(--color-white);
+      padding: var(--space-6);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .stat-number {
+      font-size: var(--text-4xl);
+      font-weight: var(--font-bold);
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .stat-label {
+      color: var(--color-gray-600);
+      margin-top: var(--space-2);
+    }
+    
+    /* Featured Clubs */
+    .featured {
+      padding: var(--space-16) 0;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-12);
+    }
+    
+    .section-title {
+      font-size: var(--text-4xl);
+      margin-bottom: var(--space-4);
+    }
+    
+    .section-subtitle {
+      font-size: var(--text-lg);
+      color: var(--color-gray-600);
+    }
+    
+    .clubs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-6);
+    }
+    
+    /* CTA Section */
+    .cta {
+      background: var(--gradient-dark);
+      color: var(--color-white);
+      padding: var(--space-16) 0;
+      text-align: center;
+    }
+    
+    .cta h2 {
+      color: var(--color-white);
+      margin-bottom: var(--space-6);
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .cta .btn {
+      min-width: 200px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: var(--text-3xl);
+      }
+      
+      .hero-subtitle {
+        font-size: var(--text-base);
+      }
+      
+      .hero-search {
+        flex-direction: column;
+        border-radius: var(--radius-lg);
+        padding: var(--space-3);
+      }
+      
+      .hero-search input {
+        width: 100%;
+      }
+      
+      .hero-search button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-content">
+          <a href="/" class="nav-brand">
+            <img src="/public/logo.png" alt="Amnuaysilpa" class="nav-logo">
+            <span>ANSXtra</span>
+          </a>
+          <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <div class="nav-menu">
+            <a href="/" class="nav-link active">Home</a>
+            <a href="/pages/clubs.html" class="nav-link">Clubs</a>
+            <a href="/pages/applications.html" class="nav-link">My Applications</a>
+            <a href="/pages/about.html" class="nav-link">About</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <img src="/public/logo.png" alt="Amnuaysilpa School" class="hero-logo">
+          <h1>Discover Your Passion</h1>
+          <p class="hero-subtitle">Join extracurricular clubs at Amnuaysilpa School</p>
+          <div class="hero-actions">
+            <form class="hero-search" id="heroSearchForm">
+              <input type="text" placeholder="Search for clubs..." id="heroSearchInput">
+              <button type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">8</div>
+            <div class="stat-label">Active Clubs</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">250+</div>
+            <div class="stat-label">Student Members</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">15</div>
+            <div class="stat-label">Expert Advisors</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Events Per Year</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Clubs -->
+    <section class="featured">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Featured Clubs</h2>
+          <p class="section-subtitle">Popular clubs accepting applications now</p>
+        </div>
+        <div class="clubs-grid" id="featuredClubs">
+          <!-- Clubs will be loaded here -->
+        </div>
+        <div class="text-center mt-8">
+          <a href="/pages/clubs.html" class="btn btn-primary">View All Clubs</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+      <div class="container">
+        <h2>Ready to Get Involved?</h2>
+        <p class="mb-6">Browse our full catalog of clubs and find your community</p>
+        <div class="cta-buttons">
+          <a href="/pages/clubs.html" class="btn btn-secondary" style="background: white; color: var(--color-purple);">Browse Clubs</a>
+          <a href="/pages/applications.html" class="btn btn-primary">Track Applications</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ANSXtra</h4>
+          <p>Amnuaysilpa School's extracurricular management portal</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/pages/clubs.html">Browse Clubs</a></li>
+            <li><a href="/pages/applications.html">My Applications</a></li>
+            <li><a href="/pages/about.html">About</a></li>
+            <li><a href="/pages/about.html#content-guide">Content Guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>Email: clubs@amnuaysilpa.ac.th</p>
+          <p>Phone: 02-XXX-XXXX</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Amnuaysilpa School. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Component Styles -->
+  <style>
+    /* Header */
+    .header {
+      background: var(--color-white);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: var(--z-sticky);
+    }
+    
+    .navbar {
+      padding: var(--space-4) 0;
+    }
+    
+    .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-weight: var(--font-bold);
+      font-size: var(--text-xl);
+      color: var(--color-dark-blue);
+      text-decoration: none;
+    }
+    
+    .nav-logo {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2);
+    }
+    
+    .nav-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--color-dark-blue);
+      transition: all var(--transition-fast);
+    }
+    
+    .nav-menu {
+      display: flex;
+      gap: var(--space-6);
+      align-items: center;
+    }
+    
+    .nav-link {
+      color: var(--color-gray-700);
+      font-weight: var(--font-medium);
+      transition: color var(--transition-fast);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+    }
+    
+    .nav-link:hover {
+      color: var(--color-purple);
+      text-decoration: none;
+    }
+    
+    .nav-link.active {
+      color: var(--color-purple);
+      background: var(--color-purple-light);
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--color-dark-blue);
+      color: var(--color-white);
+      padding: var(--space-12) 0 var(--space-6);
+      margin-top: auto;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-8);
+      margin-bottom: var(--space-8);
+    }
+    
+    .footer-section h4 {
+      color: var(--color-white);
+      margin-bottom: var(--space-3);
+    }
+    
+    .footer-section ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .footer-section a {
+      color: var(--color-gray-300);
+      transition: color var(--transition-fast);
+    }
+    
+    .footer-section a:hover {
+      color: var(--color-white);
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: var(--space-6);
+      text-align: center;
+      color: var(--color-gray-400);
+    }
+    
+    .footer-bottom a {
+      color: var(--color-gray-300);
+    }
+    
+    /* Club Card Component */
+    .club-card {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    
+    .club-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+    }
+    
+    .club-card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: var(--gradient-primary);
+    }
+    
+    .club-card-body {
+      padding: var(--space-6);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .club-card-header {
+      margin-bottom: var(--space-3);
+    }
+    
+    .club-card-title {
+      font-size: var(--text-xl);
+      font-weight: var(--font-bold);
+      margin-bottom: var(--space-2);
+      color: var(--color-dark-blue);
+    }
+    
+    .club-card-badges {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-3);
+    }
+    
+    .club-card-description {
+      color: var(--color-gray-600);
+      line-height: var(--leading-relaxed);
+      flex: 1;
+      margin-bottom: var(--space-4);
+    }
+    
+    .club-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--color-gray-200);
+    }
+    
+    .club-card-meeting {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+    }
+    
+    .club-card-action {
+      text-decoration: none;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: flex;
+      }
+      
+      .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        width: 100%;
+        background: var(--color-white);
+        flex-direction: column;
+        padding: var(--space-6);
+        box-shadow: var(--shadow-lg);
+        transition: left var(--transition-base);
+      }
+      
+      .nav-menu.active {
+        left: 0;
+      }
+    }
+  </style>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { getClubs } from '/scripts/data.js';
+    import { showToast, initLazyLoading } from '/scripts/ui.js';
+    
+    // Mobile menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    navToggle?.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      const spans = navToggle.querySelectorAll('span');
+      spans[0].style.transform = navMenu.classList.contains('active') ? 'rotate(45deg) translateY(6px)' : '';
+      spans[1].style.opacity = navMenu.classList.contains('active') ? '0' : '1';
+      spans[2].style.transform = navMenu.classList.contains('active') ? 'rotate(-45deg) translateY(-6px)' : '';
+    });
+    
+    // Hero search
+    const searchForm = document.getElementById('heroSearchForm');
+    searchForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const query = document.getElementById('heroSearchInput').value;
+      window.location.href = `/pages/clubs.html?search=${encodeURIComponent(query)}`;
+    });
+    
+    // Load featured clubs
+    async function loadFeaturedClubs() {
+      const container = document.getElementById('featuredClubs');
+      if (!container) return;
+      
+      try {
+        const clubs = await getClubs();
+        const featured = clubs.filter(club => club.acceptingApplications).slice(0, 3);
+        
+        container.innerHTML = featured.map(club => `
+          <div class="club-card">
+            <img src="${club.image}" alt="${club.name}" class="club-card-image" onerror="this.style.display='none'">
+            <div class="club-card-body">
+              <div class="club-card-header">
+                <h3 class="club-card-title">${club.name}</h3>
+                <div class="club-card-badges">
+                  <span class="badge badge-primary">${club.type}</span>
+                  <span class="badge badge-info">${club.category}</span>
+                </div>
+              </div>
+              <p class="club-card-description">${club.description}</p>
+              <div class="club-card-footer">
+                <span class="club-card-meeting">${club.meeting.day} ${club.meeting.time}</span>
+                <a href="/pages/club.html?id=${club.id}" class="btn btn-primary btn-sm club-card-action">Learn More</a>
+              </div>
+            </div>
+          </div>
+        `).join('');
+        
+        initLazyLoading();
+      } catch (error) {
+        console.error('Error loading featured clubs:', error);
+        container.innerHTML = '<p>Error loading clubs. Please try again later.</p>';
+      }
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      loadFeaturedClubs();
+    });
+  </script>
+</body>
+</html>

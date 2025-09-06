@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply to Club - ANSXtra</title>
+  <meta name="description" content="Submit your application to join this club">
+  <link rel="icon" type="image/png" href="/public/logo.png">
+  <link rel="stylesheet" href="/styles/globals.css">
+  <style>
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: var(--space-4) 0;
+      background: var(--color-gray-50);
+    }
+    
+    .breadcrumb-list {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .breadcrumb-item {
+      color: var(--color-gray-600);
+    }
+    
+    .breadcrumb-item a {
+      color: var(--color-purple);
+    }
+    
+    .breadcrumb-item::after {
+      content: '›';
+      margin-left: var(--space-2);
+      color: var(--color-gray-400);
+    }
+    
+    .breadcrumb-item:last-child::after {
+      display: none;
+    }
+    
+    .breadcrumb-item:last-child {
+      color: var(--color-gray-900);
+      font-weight: var(--font-medium);
+    }
+    
+    /* Page Header */
+    .page-header {
+      background: var(--gradient-primary);
+      color: var(--color-white);
+      padding: var(--space-8) 0;
+      margin-bottom: var(--space-8);
+    }
+    
+    .page-header h1 {
+      color: var(--color-white);
+      font-size: var(--text-3xl);
+      margin-bottom: var(--space-2);
+    }
+    
+    .page-header p {
+      font-size: var(--text-lg);
+      opacity: 0.95;
+    }
+    
+    /* Form Layout */
+    .form-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 var(--container-padding);
+      margin-bottom: var(--space-12);
+    }
+    
+    .form-card {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: var(--space-8);
+    }
+    
+    .form-section {
+      margin-bottom: var(--space-8);
+    }
+    
+    .form-section:last-child {
+      margin-bottom: 0;
+    }
+    
+    .section-title {
+      font-size: var(--text-xl);
+      font-weight: var(--font-bold);
+      color: var(--color-dark-blue);
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-3);
+      border-bottom: 2px solid var(--color-gray-200);
+    }
+    
+    /* Form Fields */
+    .form-group {
+      margin-bottom: var(--space-6);
+    }
+    
+    .form-label {
+      display: block;
+      font-weight: var(--font-medium);
+      margin-bottom: var(--space-2);
+      color: var(--color-gray-700);
+    }
+    
+    .form-label-required::after {
+      content: ' *';
+      color: var(--color-error);
+    }
+    
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      border: 1px solid var(--color-gray-300);
+      border-radius: var(--radius-md);
+      background: var(--color-white);
+      font-size: var(--text-base);
+      transition: all var(--transition-fast);
+    }
+    
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--color-purple);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+    }
+    
+    .form-input.error,
+    .form-select.error,
+    .form-textarea.error {
+      border-color: var(--color-error);
+    }
+    
+    .form-input.error:focus,
+    .form-select.error:focus,
+    .form-textarea.error:focus {
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+    
+    .form-help {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+      margin-top: var(--space-1);
+    }
+    
+    .form-error {
+      font-size: var(--text-sm);
+      color: var(--color-error);
+      margin-top: var(--space-1);
+      display: none;
+    }
+    
+    .form-error.show {
+      display: block;
+    }
+    
+    .form-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    .form-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right var(--space-3) center;
+      padding-right: var(--space-10);
+    }
+    
+    /* Checkbox Group */
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: var(--space-3);
+      margin-top: var(--space-2);
+    }
+    
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    
+    .checkbox-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    
+    .checkbox-item label {
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    /* Agreement Section */
+    .agreement-box {
+      background: var(--color-gray-50);
+      border: 1px solid var(--color-gray-300);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      margin-bottom: var(--space-4);
+    }
+    
+    .agreement-text {
+      font-size: var(--text-sm);
+      color: var(--color-gray-600);
+      line-height: var(--leading-relaxed);
+      margin-bottom: var(--space-3);
+    }
+    
+    .agreement-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+    
+    .agreement-checkbox input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    
+    .agreement-checkbox label {
+      cursor: pointer;
+      user-select: none;
+      font-weight: var(--font-medium);
+    }
+    
+    /* Character Counter */
+    .char-counter {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+      text-align: right;
+      margin-top: var(--space-1);
+    }
+    
+    .char-counter.warning {
+      color: var(--color-warning);
+    }
+    
+    .char-counter.error {
+      color: var(--color-error);
+    }
+    
+    /* Form Actions */
+    .form-actions {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: space-between;
+      align-items: center;
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--color-gray-200);
+    }
+    
+    .form-actions-left {
+      display: flex;
+      gap: var(--space-3);
+    }
+    
+    .form-actions-right {
+      display: flex;
+      gap: var(--space-3);
+    }
+    
+    /* Progress Indicator */
+    .progress-bar {
+      height: 4px;
+      background: var(--color-gray-200);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin-bottom: var(--space-8);
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: var(--gradient-primary);
+      width: 0%;
+      transition: width var(--transition-base);
+    }
+    
+    /* Loading State */
+    .form-loading {
+      pointer-events: none;
+      opacity: 0.6;
+    }
+    
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid var(--color-gray-300);
+      border-top-color: var(--color-purple);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .form-actions {
+        flex-direction: column;
+        gap: var(--space-3);
+      }
+      
+      .form-actions-left,
+      .form-actions-right {
+        width: 100%;
+      }
+      
+      .form-actions-left button,
+      .form-actions-right button {
+        width: 100%;
+      }
+      
+      .checkbox-group {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-content">
+          <a href="/" class="nav-brand">
+            <img src="/public/logo.png" alt="Amnuaysilpa" class="nav-logo">
+            <span>ANSXtra</span>
+          </a>
+          <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <div class="nav-menu">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/pages/clubs.html" class="nav-link">Clubs</a>
+            <a href="/pages/applications.html" class="nav-link">My Applications</a>
+            <a href="/pages/about.html" class="nav-link">About</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+      <div class="container">
+        <ol class="breadcrumb-list">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/pages/clubs.html">Clubs</a></li>
+          <li class="breadcrumb-item"><a href="#" id="breadcrumbClub">Loading...</a></li>
+          <li class="breadcrumb-item">Apply</li>
+        </ol>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <h1>Application Form</h1>
+        <p id="clubName">Loading club information...</p>
+      </div>
+    </section>
+
+    <!-- Progress Bar -->
+    <div class="form-container">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <!-- Application Form -->
+    <div class="form-container">
+      <form id="applicationForm" class="form-card">
+        <!-- Personal Information -->
+        <section class="form-section">
+          <h2 class="section-title">Personal Information</h2>
+          
+          <div class="form-group">
+            <label for="fullName" class="form-label form-label-required">Full Name</label>
+            <input type="text" id="fullName" name="fullName" class="form-input" placeholder="Enter your full name">
+            <span class="form-help">Enter your first and last name as it appears on school records</span>
+            <span class="form-error" id="fullNameError"></span>
+          </div>
+          
+          <div class="form-group">
+            <label for="grade" class="form-label form-label-required">Grade Level</label>
+            <select id="grade" name="grade" class="form-select">
+              <option value="">Select your grade</option>
+              <option value="7">Grade 7</option>
+              <option value="8">Grade 8</option>
+              <option value="9">Grade 9</option>
+              <option value="10">Grade 10</option>
+              <option value="11">Grade 11</option>
+              <option value="12">Grade 12</option>
+            </select>
+            <span class="form-error" id="gradeError"></span>
+          </div>
+          
+          <div class="form-group">
+            <label for="email" class="form-label form-label-required">Student Email</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="your.name@student.amnuaysilpa.ac.th">
+            <span class="form-help">Must use your official @student.amnuaysilpa.ac.th email address</span>
+            <span class="form-error" id="emailError"></span>
+          </div>
+        </section>
+
+        <!-- Application Details -->
+        <section class="form-section">
+          <h2 class="section-title">Application Details</h2>
+          
+          <div class="form-group">
+            <label for="motivation" class="form-label form-label-required">Why do you want to join this club?</label>
+            <textarea id="motivation" name="motivation" class="form-textarea" placeholder="Tell us about your interest in this club and what you hope to gain from it..."></textarea>
+            <div class="char-counter" id="motivationCounter">0 / 500 characters</div>
+            <span class="form-error" id="motivationError"></span>
+          </div>
+          
+          <div class="form-group">
+            <label for="experience" class="form-label">Previous Experience (Optional)</label>
+            <textarea id="experience" name="experience" class="form-textarea" placeholder="Describe any relevant experience or skills you have..."></textarea>
+            <span class="form-help">This could include related activities, competitions, or skills</span>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label form-label-required">When are you available for meetings?</label>
+            <div class="checkbox-group">
+              <div class="checkbox-item">
+                <input type="checkbox" id="monday" name="availability" value="Monday">
+                <label for="monday">Monday</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="tuesday" name="availability" value="Tuesday">
+                <label for="tuesday">Tuesday</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="wednesday" name="availability" value="Wednesday">
+                <label for="wednesday">Wednesday</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="thursday" name="availability" value="Thursday">
+                <label for="thursday">Thursday</label>
+              </div>
+              <div class="checkbox-item">
+                <input type="checkbox" id="friday" name="availability" value="Friday">
+                <label for="friday">Friday</label>
+              </div>
+            </div>
+            <span class="form-error" id="availabilityError"></span>
+          </div>
+        </section>
+
+        <!-- Agreement -->
+        <section class="form-section">
+          <h2 class="section-title">Terms & Agreement</h2>
+          
+          <div class="agreement-box">
+            <div class="agreement-text">
+              By submitting this application, I understand that:
+              <ul>
+                <li>I am committed to attending regular club meetings</li>
+                <li>I will follow the club's rules and guidelines</li>
+                <li>I will represent Amnuaysilpa School positively</li>
+                <li>My application may be reviewed by club leaders and advisors</li>
+                <li>Acceptance is not guaranteed and depends on available spots</li>
+              </ul>
+            </div>
+            <div class="agreement-checkbox">
+              <input type="checkbox" id="agreement" name="agreement">
+              <label for="agreement">I have read and agree to the terms above</label>
+            </div>
+          </div>
+          <span class="form-error" id="agreementError"></span>
+        </section>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <div class="form-actions-left">
+            <button type="button" class="btn btn-ghost" id="cancelBtn">Cancel</button>
+            <button type="button" class="btn btn-secondary" id="saveBtn">Save Draft</button>
+          </div>
+          <div class="form-actions-right">
+            <button type="submit" class="btn btn-primary" id="submitBtn" disabled>
+              <span id="submitText">Submit Application</span>
+              <span id="submitSpinner" class="spinner hidden"></span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ANSXtra</h4>
+          <p>Amnuaysilpa School's extracurricular management portal</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/pages/clubs.html">Browse Clubs</a></li>
+            <li><a href="/pages/applications.html">My Applications</a></li>
+            <li><a href="/pages/about.html">About</a></li>
+            <li><a href="/pages/about.html#content-guide">Content Guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>Email: clubs@amnuaysilpa.ac.th</p>
+          <p>Phone: 02-XXX-XXXX</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Amnuaysilpa School. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Component Styles (reused) -->
+  <style>
+    /* Header */
+    .header {
+      background: var(--color-white);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: var(--z-sticky);
+    }
+    
+    .navbar {
+      padding: var(--space-4) 0;
+    }
+    
+    .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-weight: var(--font-bold);
+      font-size: var(--text-xl);
+      color: var(--color-dark-blue);
+      text-decoration: none;
+    }
+    
+    .nav-logo {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2);
+    }
+    
+    .nav-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--color-dark-blue);
+      transition: all var(--transition-fast);
+    }
+    
+    .nav-menu {
+      display: flex;
+      gap: var(--space-6);
+      align-items: center;
+    }
+    
+    .nav-link {
+      color: var(--color-gray-700);
+      font-weight: var(--font-medium);
+      transition: color var(--transition-fast);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+    }
+    
+    .nav-link:hover {
+      color: var(--color-purple);
+      text-decoration: none;
+    }
+    
+    .nav-link.active {
+      color: var(--color-purple);
+      background: var(--color-purple-light);
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--color-dark-blue);
+      color: var(--color-white);
+      padding: var(--space-12) 0 var(--space-6);
+      margin-top: auto;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-8);
+      margin-bottom: var(--space-8);
+    }
+    
+    .footer-section h4 {
+      color: var(--color-white);
+      margin-bottom: var(--space-3);
+    }
+    
+    .footer-section ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .footer-section a {
+      color: var(--color-gray-300);
+      transition: color var(--transition-fast);
+    }
+    
+    .footer-section a:hover {
+      color: var(--color-white);
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: var(--space-6);
+      text-align: center;
+      color: var(--color-gray-400);
+    }
+    
+    .footer-bottom a {
+      color: var(--color-gray-300);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: flex;
+      }
+      
+      .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        width: 100%;
+        background: var(--color-white);
+        flex-direction: column;
+        padding: var(--space-6);
+        box-shadow: var(--shadow-lg);
+        transition: left var(--transition-base);
+      }
+      
+      .nav-menu.active {
+        left: 0;
+      }
+    }
+  </style>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { getClubById, createApplication, checkExistingApplication } from '/scripts/data.js';
+    import { validateApplicationForm, validateEmail, validateName, validateGrade, validateMotivation, validateAvailability } from '/scripts/validators.js';
+    import { showToast, showModal, getQueryParam } from '/scripts/ui.js';
+    import { setCurrentUser } from '/scripts/state.js';
+    
+    let currentClub = null;
+    let formData = {};
+    
+    // Mobile menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    navToggle?.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      const spans = navToggle.querySelectorAll('span');
+      spans[0].style.transform = navMenu.classList.contains('active') ? 'rotate(45deg) translateY(6px)' : '';
+      spans[1].style.opacity = navMenu.classList.contains('active') ? '0' : '1';
+      spans[2].style.transform = navMenu.classList.contains('active') ? 'rotate(-45deg) translateY(-6px)' : '';
+    });
+    
+    // Load club info
+    async function loadClubInfo() {
+      const clubId = getQueryParam('id');
+      
+      if (!clubId) {
+        showToast('No club specified', 'error');
+        window.location.href = '/pages/clubs.html';
+        return;
+      }
+      
+      try {
+        currentClub = await getClubById(clubId);
+        
+        // Update UI with club info
+        document.getElementById('clubName').textContent = `Applying to: ${currentClub.name}`;
+        document.getElementById('breadcrumbClub').textContent = currentClub.name;
+        document.getElementById('breadcrumbClub').href = `/pages/club.html?id=${clubId}`;
+        
+        // Check if club is accepting applications
+        if (!currentClub.acceptingApplications) {
+          showToast('This club is not accepting applications', 'error');
+          setTimeout(() => {
+            window.location.href = `/pages/club.html?id=${clubId}`;
+          }, 2000);
+        }
+      } catch (error) {
+        console.error('Error loading club:', error);
+        showToast('Club not found', 'error');
+        setTimeout(() => {
+          window.location.href = '/pages/clubs.html';
+        }, 2000);
+      }
+    }
+    
+    // Form validation
+    function validateField(fieldId, value) {
+      let result = { isValid: true, error: null };
+      const errorElement = document.getElementById(`${fieldId}Error`);
+      const inputElement = document.getElementById(fieldId);
+      
+      switch (fieldId) {
+        case 'fullName':
+          result = validateName(value);
+          break;
+        case 'grade':
+          result = validateGrade(value);
+          break;
+        case 'email':
+          result = validateEmail(value);
+          break;
+        case 'motivation':
+          result = validateMotivation(value);
+          break;
+      }
+      
+      if (errorElement) {
+        if (!result.isValid) {
+          errorElement.textContent = result.error;
+          errorElement.classList.add('show');
+          inputElement?.classList.add('error');
+        } else {
+          errorElement.textContent = '';
+          errorElement.classList.remove('show');
+          inputElement?.classList.remove('error');
+        }
+      }
+      
+      return result.isValid;
+    }
+    
+    // Update progress bar
+    function updateProgress() {
+      const form = document.getElementById('applicationForm');
+      const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
+      const checkboxes = form.querySelectorAll('input[name="availability"]:checked');
+      const agreement = document.getElementById('agreement').checked;
+      
+      let filled = 0;
+      let total = inputs.length + 2; // +1 for availability, +1 for agreement
+      
+      inputs.forEach(input => {
+        if (input.value.trim()) filled++;
+      });
+      
+      if (checkboxes.length > 0) filled++;
+      if (agreement) filled++;
+      
+      const progress = (filled / total) * 100;
+      document.getElementById('progressFill').style.width = `${progress}%`;
+      
+      // Enable/disable submit button
+      const submitBtn = document.getElementById('submitBtn');
+      if (progress === 100) {
+        submitBtn.disabled = false;
+      } else {
+        submitBtn.disabled = true;
+      }
+    }
+    
+    // Character counter for motivation
+    function updateCharCounter() {
+      const motivation = document.getElementById('motivation');
+      const counter = document.getElementById('motivationCounter');
+      const length = motivation.value.length;
+      
+      counter.textContent = `${length} / 500 characters`;
+      
+      if (length < 50) {
+        counter.className = 'char-counter warning';
+      } else if (length > 500) {
+        counter.className = 'char-counter error';
+      } else {
+        counter.className = 'char-counter';
+      }
+    }
+    
+    // Handle form submission
+    async function handleSubmit(e) {
+      e.preventDefault();
+      
+      // Collect form data
+      const form = e.target;
+      const checkboxes = form.querySelectorAll('input[name="availability"]:checked');
+      
+      formData = {
+        name: form.fullName.value.trim(),
+        grade: form.grade.value,
+        email: form.email.value.trim(),
+        motivation: form.motivation.value.trim(),
+        experience: form.experience.value.trim(),
+        availability: Array.from(checkboxes).map(cb => cb.value),
+        agreement: form.agreement.checked
+      };
+      
+      // Validate all fields
+      const validation = validateApplicationForm(formData);
+      
+      if (!validation.isValid) {
+        // Show first error
+        const firstError = Object.keys(validation.errors)[0];
+        const firstErrorElement = document.getElementById(firstError);
+        if (firstErrorElement) {
+          firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          firstErrorElement.focus();
+        }
+        
+        // Display all errors
+        Object.keys(validation.errors).forEach(field => {
+          const errorElement = document.getElementById(`${field}Error`);
+          if (errorElement) {
+            errorElement.textContent = validation.errors[field];
+            errorElement.classList.add('show');
+          }
+        });
+        
+        showToast('Please fix the errors in the form', 'error');
+        return;
+      }
+      
+      // Check for existing application
+      try {
+        const existing = await checkExistingApplication(currentClub.id, formData.email);
+        
+        if (existing) {
+          const shouldUpdate = await showModal({
+            title: 'Existing Application Found',
+            message: `You have already applied to ${currentClub.name}. Do you want to update your application?`,
+            confirmText: 'Update Application',
+            cancelText: 'Cancel'
+          });
+          
+          if (!shouldUpdate) return;
+        }
+      } catch (error) {
+        console.error('Error checking existing application:', error);
+      }
+      
+      // Show loading state
+      const submitBtn = document.getElementById('submitBtn');
+      const submitText = document.getElementById('submitText');
+      const submitSpinner = document.getElementById('submitSpinner');
+      
+      submitBtn.disabled = true;
+      submitText.textContent = 'Submitting...';
+      submitSpinner.classList.remove('hidden');
+      form.classList.add('form-loading');
+      
+      // Submit application
+      try {
+        const applicationData = {
+          clubId: currentClub.id,
+          applicant: {
+            name: formData.name,
+            grade: formData.grade,
+            email: formData.email
+          },
+          answers: {
+            motivation: formData.motivation,
+            experience: formData.experience || '',
+            availability: formData.availability
+          }
+        };
+        
+        const result = await createApplication(applicationData);
+        
+        // Save user info for session
+        setCurrentUser({
+          name: formData.name,
+          email: formData.email,
+          grade: formData.grade
+        });
+        
+        // Redirect to confirmation
+        sessionStorage.setItem('lastApplication', JSON.stringify({
+          ...result,
+          clubName: currentClub.name
+        }));
+        
+        window.location.href = '/pages/apply-confirm.html';
+      } catch (error) {
+        console.error('Error submitting application:', error);
+        showToast('Failed to submit application. Please try again.', 'error');
+        
+        // Reset button state
+        submitBtn.disabled = false;
+        submitText.textContent = 'Submit Application';
+        submitSpinner.classList.add('hidden');
+        form.classList.remove('form-loading');
+      }
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      loadClubInfo();
+      
+      const form = document.getElementById('applicationForm');
+      
+      // Add event listeners
+      form.addEventListener('submit', handleSubmit);
+      
+      // Field validation on blur
+      document.getElementById('fullName')?.addEventListener('blur', (e) => {
+        validateField('fullName', e.target.value);
+        updateProgress();
+      });
+      
+      document.getElementById('grade')?.addEventListener('change', (e) => {
+        validateField('grade', e.target.value);
+        updateProgress();
+      });
+      
+      document.getElementById('email')?.addEventListener('blur', (e) => {
+        validateField('email', e.target.value);
+        updateProgress();
+      });
+      
+      document.getElementById('motivation')?.addEventListener('input', (e) => {
+        updateCharCounter();
+        validateField('motivation', e.target.value);
+        updateProgress();
+      });
+      
+      // Availability checkboxes
+      const availabilityCheckboxes = document.querySelectorAll('input[name="availability"]');
+      availabilityCheckboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+          const checked = document.querySelectorAll('input[name="availability"]:checked');
+          const errorElement = document.getElementById('availabilityError');
+          
+          if (checked.length === 0) {
+            errorElement.textContent = 'Please select at least one day';
+            errorElement.classList.add('show');
+          } else {
+            errorElement.textContent = '';
+            errorElement.classList.remove('show');
+          }
+          
+          updateProgress();
+        });
+      });
+      
+      // Agreement checkbox
+      document.getElementById('agreement')?.addEventListener('change', (e) => {
+        const errorElement = document.getElementById('agreementError');
+        
+        if (!e.target.checked) {
+          errorElement.textContent = 'You must agree to the terms';
+          errorElement.classList.add('show');
+        } else {
+          errorElement.textContent = '';
+          errorElement.classList.remove('show');
+        }
+        
+        updateProgress();
+      });
+      
+      // Cancel button
+      document.getElementById('cancelBtn')?.addEventListener('click', () => {
+        window.history.back();
+      });
+      
+      // Save draft button (placeholder)
+      document.getElementById('saveBtn')?.addEventListener('click', () => {
+        showToast('Draft saved locally', 'success');
+      });
+      
+      // Initial progress update
+      updateProgress();
+    });
+  </script>
+</body>
+</html>

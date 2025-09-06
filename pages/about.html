@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About ANSXtra - Amnuaysilpa Extracurricular Portal</title>
+  <meta name="description" content="Learn about ANSXtra and how to manage content">
+  <link rel="icon" type="image/png" href="/public/logo.png">
+  <link rel="stylesheet" href="/styles/globals.css">
+  <style>
+    /* Page Header */
+    .page-header {
+      background: var(--gradient-primary);
+      color: var(--color-white);
+      padding: var(--space-12) 0;
+      margin-bottom: var(--space-8);
+    }
+    
+    .page-header h1 {
+      color: var(--color-white);
+      margin-bottom: var(--space-3);
+    }
+    
+    .page-header p {
+      font-size: var(--text-lg);
+      opacity: 0.95;
+    }
+    
+    /* Content Sections */
+    .content-section {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: var(--space-8);
+      margin-bottom: var(--space-8);
+    }
+    
+    .section-title {
+      font-size: var(--text-2xl);
+      color: var(--color-dark-blue);
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-3);
+      border-bottom: 2px solid var(--color-gray-200);
+    }
+    
+    /* Content Guide */
+    .guide-section {
+      background: var(--color-blue-light);
+      border-left: 4px solid var(--color-blue);
+      padding: var(--space-6);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-6);
+    }
+    
+    .guide-title {
+      font-size: var(--text-xl);
+      font-weight: var(--font-bold);
+      color: var(--color-blue-dark);
+      margin-bottom: var(--space-3);
+    }
+    
+    .guide-steps {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .guide-step {
+      padding: var(--space-3) 0;
+      padding-left: var(--space-8);
+      position: relative;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    .guide-step:last-child {
+      border-bottom: none;
+    }
+    
+    .guide-step::before {
+      content: attr(data-step);
+      position: absolute;
+      left: 0;
+      top: var(--space-3);
+      width: 24px;
+      height: 24px;
+      background: var(--color-blue);
+      color: var(--color-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: var(--text-sm);
+    }
+    
+    .code-block {
+      background: var(--color-gray-900);
+      color: var(--color-gray-100);
+      padding: var(--space-4);
+      border-radius: var(--radius-md);
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      margin: var(--space-3) 0;
+    }
+    
+    .file-path {
+      background: var(--color-gray-100);
+      color: var(--color-gray-700);
+      padding: var(--space-1) var(--space-2);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      display: inline-block;
+    }
+    
+    .warning-box {
+      background: var(--color-warning-light);
+      border-left: 4px solid var(--color-warning);
+      padding: var(--space-4);
+      border-radius: var(--radius-md);
+      margin: var(--space-4) 0;
+    }
+    
+    .warning-box strong {
+      color: var(--color-warning-dark);
+    }
+    
+    .success-box {
+      background: var(--color-success-light);
+      border-left: 4px solid var(--color-success);
+      padding: var(--space-4);
+      border-radius: var(--radius-md);
+      margin: var(--space-4) 0;
+    }
+    
+    .success-box strong {
+      color: var(--color-success-dark);
+    }
+    
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-6);
+      margin-top: var(--space-6);
+    }
+    
+    .feature-card {
+      text-align: center;
+      padding: var(--space-6);
+      background: var(--color-gray-50);
+      border-radius: var(--radius-lg);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: var(--space-3);
+    }
+    
+    .feature-title {
+      font-size: var(--text-lg);
+      font-weight: var(--font-bold);
+      color: var(--color-dark-blue);
+      margin-bottom: var(--space-2);
+    }
+    
+    .feature-description {
+      color: var(--color-gray-600);
+      font-size: var(--text-sm);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-content">
+          <a href="/" class="nav-brand">
+            <img src="/public/logo.png" alt="Amnuaysilpa" class="nav-logo">
+            <span>ANSXtra</span>
+          </a>
+          <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <div class="nav-menu">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/pages/clubs.html" class="nav-link">Clubs</a>
+            <a href="/pages/applications.html" class="nav-link">My Applications</a>
+            <a href="/pages/about.html" class="nav-link active">About</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <h1>About ANSXtra</h1>
+        <p>Amnuaysilpa's Extracurricular Management Portal</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- About Section -->
+      <section class="content-section">
+        <h2 class="section-title">Welcome to ANSXtra</h2>
+        <p>ANSXtra is Amnuaysilpa School's comprehensive platform for managing extracurricular activities. Our portal makes it easy for students to discover and join clubs, and for club leaders and advisors to manage their organizations effectively.</p>
+        
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3 class="feature-title">Discover Clubs</h3>
+            <p class="feature-description">Browse all available clubs with detailed information about activities, schedules, and requirements.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📝</div>
+            <h3 class="feature-title">Easy Applications</h3>
+            <p class="feature-description">Submit applications online with a simple form and track your application status in real-time.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3 class="feature-title">Track Progress</h3>
+            <p class="feature-description">Monitor your applications and receive updates when your status changes.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Content Guide Section -->
+      <section class="content-section" id="content-guide">
+        <h2 class="section-title">📚 Content Management Guide</h2>
+        <p>This guide explains how to update club information and images without coding knowledge.</p>
+        
+        <!-- Managing Club Data -->
+        <div class="guide-section">
+          <h3 class="guide-title">Managing Club Information</h3>
+          <p>All club information is stored in a single JSON file that you can edit with any text editor.</p>
+          
+          <ol class="guide-steps">
+            <li class="guide-step" data-step="1">
+              <strong>Locate the clubs file:</strong><br>
+              Open the file at <span class="file-path">/data/clubs.json</span> in any text editor (Notepad, TextEdit, VS Code, etc.)
+            </li>
+            
+            <li class="guide-step" data-step="2">
+              <strong>Find the club to edit:</strong><br>
+              Each club is an object inside square brackets. Look for the club by its "name" field.
+            </li>
+            
+            <li class="guide-step" data-step="3">
+              <strong>Edit the information:</strong><br>
+              Update any field you need. Common fields include:
+              <ul style="margin-top: var(--space-2);">
+                <li><strong>name:</strong> Club name</li>
+                <li><strong>description:</strong> Short description</li>
+                <li><strong>acceptingApplications:</strong> true or false</li>
+                <li><strong>meeting:</strong> Day, time, and location</li>
+                <li><strong>contacts:</strong> Leader and advisor information</li>
+              </ul>
+            </li>
+            
+            <li class="guide-step" data-step="4">
+              <strong>Save the file:</strong><br>
+              Save the file and refresh your browser to see the changes.
+            </li>
+          </ol>
+          
+          <div class="warning-box">
+            <strong>⚠️ Important:</strong> Make sure to maintain proper JSON formatting. Each string must be in quotes, and don't forget commas between items!
+          </div>
+        </div>
+
+        <!-- Adding Club Images -->
+        <div class="guide-section">
+          <h3 class="guide-title">Adding Club Images</h3>
+          <p>Club images are stored in the public folder and referenced in the JSON file.</p>
+          
+          <ol class="guide-steps">
+            <li class="guide-step" data-step="1">
+              <strong>Prepare your image:</strong><br>
+              Resize your image to approximately 800x400 pixels for best results. Use JPG or PNG format.
+            </li>
+            
+            <li class="guide-step" data-step="2">
+              <strong>Name your image file:</strong><br>
+              Use a simple, descriptive name like <span class="file-path">mun.jpg</span> or <span class="file-path">eco-committee.jpg</span>
+            </li>
+            
+            <li class="guide-step" data-step="3">
+              <strong>Place the image:</strong><br>
+              Copy your image file to <span class="file-path">/public/clubs/</span> folder
+            </li>
+            
+            <li class="guide-step" data-step="4">
+              <strong>Update the JSON:</strong><br>
+              In <span class="file-path">/data/clubs.json</span>, update the image path:
+              <div class="code-block">"image": "/clubs/your-image-name.jpg"</div>
+            </li>
+          </ol>
+          
+          <div class="success-box">
+            <strong>✓ Tip:</strong> Keep image file sizes under 500KB for faster loading. Use online tools to compress images if needed.
+          </div>
+        </div>
+
+        <!-- Example JSON Structure -->
+        <div class="guide-section">
+          <h3 class="guide-title">Example Club Entry</h3>
+          <p>Here's a complete example of a club entry in the JSON file:</p>
+          
+          <div class="code-block">{
+  "id": "debate",
+  "name": "Debate Club",
+  "type": "Student-led",
+  "category": "Academic",
+  "image": "/clubs/debate.jpg",
+  "description": "Develop critical thinking and public speaking skills.",
+  "whatYouDo": [
+    "Weekly practice debates",
+    "Compete in tournaments",
+    "Learn argumentation techniques"
+  ],
+  "meeting": {
+    "day": "Tuesday",
+    "time": "15:30-17:00",
+    "location": "Room A201"
+  },
+  "contacts": {
+    "leader": {
+      "name": "John Smith",
+      "email": "john.smith@student.amnuaysilpa.ac.th"
+    },
+    "advisor": {
+      "name": "Ms. Johnson",
+      "email": "johnson@amnuaysilpa.ac.th"
+    }
+  },
+  "acceptingApplications": true,
+  "faq": [
+    {
+      "q": "Do I need experience?",
+      "a": "No, beginners are welcome!"
+    }
+  ]
+}</div>
+        </div>
+
+        <!-- Common Tasks -->
+        <div class="guide-section">
+          <h3 class="guide-title">Common Tasks</h3>
+          
+          <h4 style="margin-top: var(--space-4); margin-bottom: var(--space-2);">To close applications for a club:</h4>
+          <p>Change <code>"acceptingApplications": true</code> to <code>"acceptingApplications": false</code></p>
+          
+          <h4 style="margin-top: var(--space-4); margin-bottom: var(--space-2);">To update meeting time:</h4>
+          <p>Edit the values in the "meeting" object:</p>
+          <div class="code-block">"meeting": {
+  "day": "Wednesday",
+  "time": "16:00-17:30",
+  "location": "New Room B102"
+}</div>
+          
+          <h4 style="margin-top: var(--space-4); margin-bottom: var(--space-2);">To add a new FAQ item:</h4>
+          <p>Add a new object to the "faq" array:</p>
+          <div class="code-block">"faq": [
+  {
+    "q": "Existing question?",
+    "a": "Existing answer."
+  },
+  {
+    "q": "Your new question?",
+    "a": "Your new answer."
+  }
+]</div>
+        </div>
+        
+        <div class="warning-box">
+          <strong>Need help?</strong> Contact the IT department at it@amnuaysilpa.ac.th for assistance with content updates.
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="content-section">
+        <h2 class="section-title">Contact Us</h2>
+        <p>For questions about clubs and applications:</p>
+        <ul>
+          <li>Email: clubs@amnuaysilpa.ac.th</li>
+          <li>Phone: 02-XXX-XXXX ext. 123</li>
+          <li>Office: Student Affairs, Building A, Room 105</li>
+        </ul>
+        
+        <p style="margin-top: var(--space-4);">For technical support:</p>
+        <ul>
+          <li>Email: it@amnuaysilpa.ac.th</li>
+          <li>Phone: 02-XXX-XXXX ext. 456</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ANSXtra</h4>
+          <p>Amnuaysilpa School's extracurricular management portal</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/pages/clubs.html">Browse Clubs</a></li>
+            <li><a href="/pages/applications.html">My Applications</a></li>
+            <li><a href="/pages/about.html">About</a></li>
+            <li><a href="#content-guide">Content Guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>Email: clubs@amnuaysilpa.ac.th</p>
+          <p>Phone: 02-XXX-XXXX</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Amnuaysilpa School. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Component Styles (reused) -->
+  <style>
+    /* Header */
+    .header {
+      background: var(--color-white);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: var(--z-sticky);
+    }
+    
+    .navbar {
+      padding: var(--space-4) 0;
+    }
+    
+    .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-weight: var(--font-bold);
+      font-size: var(--text-xl);
+      color: var(--color-dark-blue);
+      text-decoration: none;
+    }
+    
+    .nav-logo {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2);
+    }
+    
+    .nav-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--color-dark-blue);
+      transition: all var(--transition-fast);
+    }
+    
+    .nav-menu {
+      display: flex;
+      gap: var(--space-6);
+      align-items: center;
+    }
+    
+    .nav-link {
+      color: var(--color-gray-700);
+      font-weight: var(--font-medium);
+      transition: color var(--transition-fast);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+    }
+    
+    .nav-link:hover {
+      color: var(--color-purple);
+      text-decoration: none;
+    }
+    
+    .nav-link.active {
+      color: var(--color-purple);
+      background: var(--color-purple-light);
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--color-dark-blue);
+      color: var(--color-white);
+      padding: var(--space-12) 0 var(--space-6);
+      margin-top: auto;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-8);
+      margin-bottom: var(--space-8);
+    }
+    
+    .footer-section h4 {
+      color: var(--color-white);
+      margin-bottom: var(--space-3);
+    }
+    
+    .footer-section ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .footer-section a {
+      color: var(--color-gray-300);
+      transition: color var(--transition-fast);
+    }
+    
+    .footer-section a:hover {
+      color: var(--color-white);
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: var(--space-6);
+      text-align: center;
+      color: var(--color-gray-400);
+    }
+    
+    .footer-bottom a {
+      color: var(--color-gray-300);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: flex;
+      }
+      
+      .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        width: 100%;
+        background: var(--color-white);
+        flex-direction: column;
+        padding: var(--space-6);
+        box-shadow: var(--shadow-lg);
+        transition: left var(--transition-base);
+      }
+      
+      .nav-menu.active {
+        left: 0;
+      }
+    }
+  </style>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    navToggle?.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      const spans = navToggle.querySelectorAll('span');
+      spans[0].style.transform = navMenu.classList.contains('active') ? 'rotate(45deg) translateY(6px)' : '';
+      spans[1].style.opacity = navMenu.classList.contains('active') ? '0' : '1';
+      spans[2].style.transform = navMenu.classList.contains('active') ? 'rotate(-45deg) translateY(-6px)' : '';
+    });
+  </script>
+</body>
+</html>

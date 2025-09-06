@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse Clubs - ANSXtra</title>
+  <meta name="description" content="Browse all extracurricular clubs at Amnuaysilpa School">
+  <link rel="icon" type="image/png" href="/public/logo.png">
+  <link rel="stylesheet" href="/styles/globals.css">
+  <style>
+    /* Page Header */
+    .page-header {
+      background: var(--gradient-primary);
+      color: var(--color-white);
+      padding: var(--space-12) 0;
+      margin-bottom: var(--space-8);
+    }
+    
+    .page-header h1 {
+      color: var(--color-white);
+      margin-bottom: var(--space-3);
+    }
+    
+    .page-header p {
+      font-size: var(--text-lg);
+      opacity: 0.95;
+    }
+    
+    /* Filters */
+    .filters-section {
+      background: var(--color-gray-50);
+      padding: var(--space-6) 0;
+      margin-bottom: var(--space-8);
+      position: sticky;
+      top: 60px;
+      z-index: var(--z-sticky);
+      box-shadow: var(--shadow-sm);
+    }
+    
+    .filters-container {
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    .filter-label {
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+      color: var(--color-gray-600);
+    }
+    
+    .filter-input {
+      padding: var(--space-2) var(--space-3);
+      border: 1px solid var(--color-gray-300);
+      border-radius: var(--radius-md);
+      background: var(--color-white);
+      font-size: var(--text-base);
+    }
+    
+    .filter-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right var(--space-3) center;
+      padding-right: var(--space-10);
+    }
+    
+    .filter-checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    
+    .filter-checkbox {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    
+    .filter-reset {
+      align-self: flex-end;
+    }
+    
+    /* Results */
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-6);
+    }
+    
+    .results-count {
+      color: var(--color-gray-600);
+      font-size: var(--text-lg);
+    }
+    
+    .results-sort {
+      display: flex;
+      gap: var(--space-2);
+      align-items: center;
+    }
+    
+    .clubs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--space-6);
+      margin-bottom: var(--space-12);
+    }
+    
+    /* Club Card */
+    .club-card {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+    }
+    
+    .club-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+    }
+    
+    .club-card.not-accepting {
+      opacity: 0.8;
+    }
+    
+    .club-card-ribbon {
+      position: absolute;
+      top: 20px;
+      right: -30px;
+      background: var(--color-error);
+      color: var(--color-white);
+      padding: var(--space-1) var(--space-12);
+      transform: rotate(45deg);
+      font-size: var(--text-sm);
+      font-weight: var(--font-bold);
+      box-shadow: var(--shadow-md);
+      z-index: 1;
+    }
+    
+    .club-card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: linear-gradient(135deg, var(--color-purple-light), var(--color-pink-light));
+    }
+    
+    .club-card-body {
+      padding: var(--space-6);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .club-card-header {
+      margin-bottom: var(--space-3);
+    }
+    
+    .club-card-title {
+      font-size: var(--text-xl);
+      font-weight: var(--font-bold);
+      margin-bottom: var(--space-2);
+      color: var(--color-dark-blue);
+    }
+    
+    .club-card-badges {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-3);
+    }
+    
+    .club-card-description {
+      color: var(--color-gray-600);
+      line-height: var(--leading-relaxed);
+      flex: 1;
+      margin-bottom: var(--space-4);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .club-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--color-gray-200);
+    }
+    
+    .club-card-meeting {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+    }
+    
+    .club-card-meeting-day {
+      font-weight: var(--font-semibold);
+      color: var(--color-purple);
+    }
+    
+    .club-card-action {
+      text-decoration: none;
+    }
+    
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: var(--space-16) var(--space-6);
+    }
+    
+    .empty-state-icon {
+      font-size: 4rem;
+      margin-bottom: var(--space-4);
+      opacity: 0.5;
+    }
+    
+    .empty-state h3 {
+      color: var(--color-gray-700);
+      margin-bottom: var(--space-3);
+    }
+    
+    .empty-state p {
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-6);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .filters-section {
+        top: 0;
+      }
+      
+      .filters-container {
+        flex-direction: column;
+      }
+      
+      .filter-group {
+        width: 100%;
+      }
+      
+      .results-header {
+        flex-direction: column;
+        gap: var(--space-3);
+        align-items: flex-start;
+      }
+      
+      .clubs-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-content">
+          <a href="/" class="nav-brand">
+            <img src="/public/logo.png" alt="Amnuaysilpa" class="nav-logo">
+            <span>ANSXtra</span>
+          </a>
+          <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <div class="nav-menu">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/pages/clubs.html" class="nav-link active">Clubs</a>
+            <a href="/pages/applications.html" class="nav-link">My Applications</a>
+            <a href="/pages/about.html" class="nav-link">About</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <h1>Browse Clubs</h1>
+        <p>Discover all the amazing clubs and activities at Amnuaysilpa School</p>
+      </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="filters-section">
+      <div class="container">
+        <div class="filters-container">
+          <div class="filter-group">
+            <label class="filter-label">Search</label>
+            <input type="text" id="searchFilter" class="filter-input" placeholder="Search clubs...">
+          </div>
+          
+          <div class="filter-group">
+            <label class="filter-label">Day</label>
+            <select id="dayFilter" class="filter-input filter-select">
+              <option value="">All Days</option>
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label class="filter-label">Type</label>
+            <select id="typeFilter" class="filter-input filter-select">
+              <option value="">All Types</option>
+              <option value="Teacher-run">Teacher-run</option>
+              <option value="Student-led">Student-led</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <label class="filter-label">Category</label>
+            <select id="categoryFilter" class="filter-input filter-select">
+              <option value="">All Categories</option>
+              <option value="Global Citizenship">Global Citizenship</option>
+              <option value="Sustainability">Sustainability</option>
+              <option value="Community">Community</option>
+              <option value="Leadership">Leadership</option>
+              <option value="Service">Service</option>
+              <option value="Service/Health">Service/Health</option>
+              <option value="Debate/Law">Debate/Law</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <div class="filter-checkbox-group">
+              <input type="checkbox" id="acceptingFilter" class="filter-checkbox">
+              <label for="acceptingFilter">Accepting Applications Only</label>
+            </div>
+          </div>
+          
+          <button class="btn btn-ghost filter-reset" id="resetFilters">Reset Filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="container">
+      <div class="results-header">
+        <div class="results-count" id="resultsCount">Showing 8 clubs</div>
+        <div class="results-sort">
+          <label for="sortBy">Sort by:</label>
+          <select id="sortBy" class="filter-input filter-select">
+            <option value="name">Name (A-Z)</option>
+            <option value="day">Meeting Day</option>
+            <option value="type">Type</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="clubs-grid" id="clubsGrid">
+        <!-- Clubs will be loaded here -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ANSXtra</h4>
+          <p>Amnuaysilpa School's extracurricular management portal</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/pages/clubs.html">Browse Clubs</a></li>
+            <li><a href="/pages/applications.html">My Applications</a></li>
+            <li><a href="/pages/about.html">About</a></li>
+            <li><a href="/pages/about.html#content-guide">Content Guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>Email: clubs@amnuaysilpa.ac.th</p>
+          <p>Phone: 02-XXX-XXXX</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Amnuaysilpa School. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Component Styles (reused from index) -->
+  <style>
+    /* Header */
+    .header {
+      background: var(--color-white);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: var(--z-sticky);
+    }
+    
+    .navbar {
+      padding: var(--space-4) 0;
+    }
+    
+    .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-weight: var(--font-bold);
+      font-size: var(--text-xl);
+      color: var(--color-dark-blue);
+      text-decoration: none;
+    }
+    
+    .nav-logo {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2);
+    }
+    
+    .nav-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--color-dark-blue);
+      transition: all var(--transition-fast);
+    }
+    
+    .nav-menu {
+      display: flex;
+      gap: var(--space-6);
+      align-items: center;
+    }
+    
+    .nav-link {
+      color: var(--color-gray-700);
+      font-weight: var(--font-medium);
+      transition: color var(--transition-fast);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+    }
+    
+    .nav-link:hover {
+      color: var(--color-purple);
+      text-decoration: none;
+    }
+    
+    .nav-link.active {
+      color: var(--color-purple);
+      background: var(--color-purple-light);
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--color-dark-blue);
+      color: var(--color-white);
+      padding: var(--space-12) 0 var(--space-6);
+      margin-top: auto;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-8);
+      margin-bottom: var(--space-8);
+    }
+    
+    .footer-section h4 {
+      color: var(--color-white);
+      margin-bottom: var(--space-3);
+    }
+    
+    .footer-section ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .footer-section a {
+      color: var(--color-gray-300);
+      transition: color var(--transition-fast);
+    }
+    
+    .footer-section a:hover {
+      color: var(--color-white);
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: var(--space-6);
+      text-align: center;
+      color: var(--color-gray-400);
+    }
+    
+    .footer-bottom a {
+      color: var(--color-gray-300);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: flex;
+      }
+      
+      .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        width: 100%;
+        background: var(--color-white);
+        flex-direction: column;
+        padding: var(--space-6);
+        box-shadow: var(--shadow-lg);
+        transition: left var(--transition-base);
+      }
+      
+      .nav-menu.active {
+        left: 0;
+      }
+    }
+  </style>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { getClubs } from '/scripts/data.js';
+    import { debounce, getQueryParam, setQueryParam, showEmptyState } from '/scripts/ui.js';
+    
+    let allClubs = [];
+    let filteredClubs = [];
+    
+    // Mobile menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    navToggle?.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      const spans = navToggle.querySelectorAll('span');
+      spans[0].style.transform = navMenu.classList.contains('active') ? 'rotate(45deg) translateY(6px)' : '';
+      spans[1].style.opacity = navMenu.classList.contains('active') ? '0' : '1';
+      spans[2].style.transform = navMenu.classList.contains('active') ? 'rotate(-45deg) translateY(-6px)' : '';
+    });
+    
+    // Load and display clubs
+    async function loadClubs() {
+      const container = document.getElementById('clubsGrid');
+      if (!container) return;
+      
+      try {
+        allClubs = await getClubs();
+        
+        // Check for search query from URL
+        const searchQuery = getQueryParam('search');
+        if (searchQuery) {
+          document.getElementById('searchFilter').value = searchQuery;
+        }
+        
+        applyFilters();
+      } catch (error) {
+        console.error('Error loading clubs:', error);
+        container.innerHTML = '<p>Error loading clubs. Please try again later.</p>';
+      }
+    }
+    
+    // Apply filters
+    function applyFilters() {
+      const searchTerm = document.getElementById('searchFilter').value.toLowerCase();
+      const dayFilter = document.getElementById('dayFilter').value;
+      const typeFilter = document.getElementById('typeFilter').value;
+      const categoryFilter = document.getElementById('categoryFilter').value;
+      const acceptingOnly = document.getElementById('acceptingFilter').checked;
+      const sortBy = document.getElementById('sortBy').value;
+      
+      // Filter clubs
+      filteredClubs = allClubs.filter(club => {
+        if (searchTerm && !club.name.toLowerCase().includes(searchTerm) && 
+            !club.description.toLowerCase().includes(searchTerm) &&
+            !club.category.toLowerCase().includes(searchTerm)) {
+          return false;
+        }
+        if (dayFilter && club.meeting.day !== dayFilter) return false;
+        if (typeFilter && club.type !== typeFilter) return false;
+        if (categoryFilter && club.category !== categoryFilter) return false;
+        if (acceptingOnly && !club.acceptingApplications) return false;
+        return true;
+      });
+      
+      // Sort clubs
+      filteredClubs.sort((a, b) => {
+        switch (sortBy) {
+          case 'name':
+            return a.name.localeCompare(b.name);
+          case 'day':
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+            return days.indexOf(a.meeting.day) - days.indexOf(b.meeting.day);
+          case 'type':
+            return a.type.localeCompare(b.type);
+          default:
+            return 0;
+        }
+      });
+      
+      displayClubs();
+    }
+    
+    // Display filtered clubs
+    function displayClubs() {
+      const container = document.getElementById('clubsGrid');
+      const countElement = document.getElementById('resultsCount');
+      
+      countElement.textContent = `Showing ${filteredClubs.length} club${filteredClubs.length !== 1 ? 's' : ''}`;
+      
+      if (filteredClubs.length === 0) {
+        showEmptyState(container, {
+          title: 'No clubs found',
+          message: 'Try adjusting your filters or search terms',
+          icon: '🔍',
+          action: {
+            text: 'Reset Filters',
+            handler: resetFilters
+          }
+        });
+        return;
+      }
+      
+      container.innerHTML = filteredClubs.map(club => `
+        <div class="club-card ${!club.acceptingApplications ? 'not-accepting' : ''}">
+          ${!club.acceptingApplications ? '<div class="club-card-ribbon">FULL</div>' : ''}
+          <img src="${club.image}" alt="${club.name}" class="club-card-image" onerror="this.style.display='none'">
+          <div class="club-card-body">
+            <div class="club-card-header">
+              <h3 class="club-card-title">${club.name}</h3>
+              <div class="club-card-badges">
+                <span class="badge badge-primary">${club.type}</span>
+                <span class="badge badge-info">${club.category}</span>
+                ${club.acceptingApplications ? 
+                  '<span class="badge badge-success">Accepting</span>' : 
+                  '<span class="badge badge-error">Full</span>'}
+              </div>
+            </div>
+            <p class="club-card-description">${club.description}</p>
+            <div class="club-card-footer">
+              <div class="club-card-meeting">
+                <span class="club-card-meeting-day">${club.meeting.day}</span>
+                <span>${club.meeting.time}</span>
+                <span>${club.meeting.location}</span>
+              </div>
+              <a href="/pages/club.html?id=${club.id}" class="btn btn-primary btn-sm club-card-action">View Details</a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // Reset filters
+    function resetFilters() {
+      document.getElementById('searchFilter').value = '';
+      document.getElementById('dayFilter').value = '';
+      document.getElementById('typeFilter').value = '';
+      document.getElementById('categoryFilter').value = '';
+      document.getElementById('acceptingFilter').checked = false;
+      setQueryParam('search', '');
+      applyFilters();
+    }
+    
+    // Attach event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      loadClubs();
+      
+      // Debounced search
+      const searchInput = document.getElementById('searchFilter');
+      searchInput?.addEventListener('input', debounce(() => {
+        setQueryParam('search', searchInput.value);
+        applyFilters();
+      }, 300));
+      
+      // Other filters
+      document.getElementById('dayFilter')?.addEventListener('change', applyFilters);
+      document.getElementById('typeFilter')?.addEventListener('change', applyFilters);
+      document.getElementById('categoryFilter')?.addEventListener('change', applyFilters);
+      document.getElementById('acceptingFilter')?.addEventListener('change', applyFilters);
+      document.getElementById('sortBy')?.addEventListener('change', applyFilters);
+      document.getElementById('resetFilters')?.addEventListener('click', resetFilters);
+    });
+  </script>
+</body>
+</html>

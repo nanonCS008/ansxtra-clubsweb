@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Applications - ANSXtra</title>
+  <meta name="description" content="Track your club applications">
+  <link rel="icon" type="image/png" href="/public/logo.png">
+  <link rel="stylesheet" href="/styles/globals.css">
+  <style>
+    /* Page Header */
+    .page-header {
+      background: var(--gradient-primary);
+      color: var(--color-white);
+      padding: var(--space-12) 0;
+      margin-bottom: var(--space-8);
+    }
+    
+    .page-header h1 {
+      color: var(--color-white);
+      margin-bottom: var(--space-3);
+    }
+    
+    .page-header p {
+      font-size: var(--text-lg);
+      opacity: 0.95;
+    }
+    
+    /* Email Input Section */
+    .email-section {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: var(--space-8);
+      margin-bottom: var(--space-8);
+    }
+    
+    .email-form {
+      display: flex;
+      gap: var(--space-4);
+      align-items: flex-end;
+    }
+    
+    .email-group {
+      flex: 1;
+    }
+    
+    .email-label {
+      display: block;
+      font-weight: var(--font-medium);
+      margin-bottom: var(--space-2);
+      color: var(--color-gray-700);
+    }
+    
+    .email-input {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      border: 1px solid var(--color-gray-300);
+      border-radius: var(--radius-md);
+      font-size: var(--text-base);
+    }
+    
+    .email-help {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+      margin-top: var(--space-1);
+    }
+    
+    /* Applications List */
+    .applications-container {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+    
+    .application-card {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: var(--space-6);
+      transition: all var(--transition-base);
+    }
+    
+    .application-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+    
+    .application-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--space-4);
+    }
+    
+    .application-title {
+      font-size: var(--text-xl);
+      font-weight: var(--font-bold);
+      color: var(--color-dark-blue);
+      margin-bottom: var(--space-2);
+    }
+    
+    .application-meta {
+      display: flex;
+      gap: var(--space-4);
+      color: var(--color-gray-600);
+      font-size: var(--text-sm);
+    }
+    
+    .application-meta-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+    
+    .application-body {
+      background: var(--color-gray-50);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      margin-bottom: var(--space-4);
+    }
+    
+    .application-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-4);
+    }
+    
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    
+    .detail-label {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+    }
+    
+    .detail-value {
+      font-weight: var(--font-medium);
+      color: var(--color-gray-900);
+    }
+    
+    .application-actions {
+      display: flex;
+      gap: var(--space-3);
+      justify-content: flex-end;
+    }
+    
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: var(--space-16) var(--space-6);
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .empty-state-icon {
+      font-size: 4rem;
+      margin-bottom: var(--space-4);
+      opacity: 0.5;
+    }
+    
+    .empty-state h3 {
+      color: var(--color-gray-700);
+      margin-bottom: var(--space-3);
+    }
+    
+    .empty-state p {
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-6);
+    }
+    
+    /* Demo Controls */
+    .demo-banner {
+      background: var(--color-warning-light);
+      color: var(--color-warning-dark);
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-6);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    
+    .demo-banner-icon {
+      font-size: var(--text-xl);
+    }
+    
+    .demo-banner-text {
+      flex: 1;
+      font-size: var(--text-sm);
+    }
+    
+    /* Statistics */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+    
+    .stat-card {
+      background: var(--color-white);
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+    
+    .stat-number {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-bold);
+      color: var(--color-purple);
+    }
+    
+    .stat-label {
+      font-size: var(--text-sm);
+      color: var(--color-gray-600);
+      margin-top: var(--space-1);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .email-form {
+        flex-direction: column;
+      }
+      
+      .email-group {
+        width: 100%;
+      }
+      
+      .application-header {
+        flex-direction: column;
+        gap: var(--space-3);
+      }
+      
+      .application-meta {
+        flex-direction: column;
+        gap: var(--space-2);
+      }
+      
+      .application-actions {
+        flex-direction: column;
+      }
+      
+      .application-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-content">
+          <a href="/" class="nav-brand">
+            <img src="/public/logo.png" alt="Amnuaysilpa" class="nav-logo">
+            <span>ANSXtra</span>
+          </a>
+          <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <div class="nav-menu">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/pages/clubs.html" class="nav-link">Clubs</a>
+            <a href="/pages/applications.html" class="nav-link active">My Applications</a>
+            <a href="/pages/about.html" class="nav-link">About</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <h1>My Applications</h1>
+        <p>Track and manage your club applications</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- Email Input -->
+      <div class="email-section">
+        <form class="email-form" id="emailForm">
+          <div class="email-group">
+            <label for="studentEmail" class="email-label">Student Email</label>
+            <input type="email" id="studentEmail" class="email-input" placeholder="your.name@student.amnuaysilpa.ac.th" required>
+            <p class="email-help">Enter your student email to view your applications</p>
+          </div>
+          <button type="submit" class="btn btn-primary">View Applications</button>
+        </form>
+      </div>
+
+      <!-- Demo Banner -->
+      <div class="demo-banner hidden" id="demoBanner">
+        <span class="demo-banner-icon">ℹ️</span>
+        <span class="demo-banner-text">Demo Mode: Use the "Simulate Status" button to cycle through different application statuses</span>
+      </div>
+
+      <!-- Statistics -->
+      <div class="stats-grid hidden" id="statsGrid">
+        <div class="stat-card">
+          <div class="stat-number" id="statTotal">0</div>
+          <div class="stat-label">Total Applications</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="statSubmitted">0</div>
+          <div class="stat-label">Submitted</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="statReview">0</div>
+          <div class="stat-label">Under Review</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="statAccepted">0</div>
+          <div class="stat-label">Accepted</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" id="statRejected">0</div>
+          <div class="stat-label">Rejected</div>
+        </div>
+      </div>
+
+      <!-- Applications List -->
+      <div class="applications-container" id="applicationsContainer">
+        <!-- Applications will be loaded here -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ANSXtra</h4>
+          <p>Amnuaysilpa School's extracurricular management portal</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/pages/clubs.html">Browse Clubs</a></li>
+            <li><a href="/pages/applications.html">My Applications</a></li>
+            <li><a href="/pages/about.html">About</a></li>
+            <li><a href="/pages/about.html#content-guide">Content Guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>Email: clubs@amnuaysilpa.ac.th</p>
+          <p>Phone: 02-XXX-XXXX</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Amnuaysilpa School. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Component Styles (reused) -->
+  <style>
+    /* Header */
+    .header {
+      background: var(--color-white);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: var(--z-sticky);
+    }
+    
+    .navbar {
+      padding: var(--space-4) 0;
+    }
+    
+    .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-weight: var(--font-bold);
+      font-size: var(--text-xl);
+      color: var(--color-dark-blue);
+      text-decoration: none;
+    }
+    
+    .nav-logo {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2);
+    }
+    
+    .nav-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--color-dark-blue);
+      transition: all var(--transition-fast);
+    }
+    
+    .nav-menu {
+      display: flex;
+      gap: var(--space-6);
+      align-items: center;
+    }
+    
+    .nav-link {
+      color: var(--color-gray-700);
+      font-weight: var(--font-medium);
+      transition: color var(--transition-fast);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+    }
+    
+    .nav-link:hover {
+      color: var(--color-purple);
+      text-decoration: none;
+    }
+    
+    .nav-link.active {
+      color: var(--color-purple);
+      background: var(--color-purple-light);
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--color-dark-blue);
+      color: var(--color-white);
+      padding: var(--space-12) 0 var(--space-6);
+      margin-top: auto;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-8);
+      margin-bottom: var(--space-8);
+    }
+    
+    .footer-section h4 {
+      color: var(--color-white);
+      margin-bottom: var(--space-3);
+    }
+    
+    .footer-section ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .footer-section a {
+      color: var(--color-gray-300);
+      transition: color var(--transition-fast);
+    }
+    
+    .footer-section a:hover {
+      color: var(--color-white);
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: var(--space-6);
+      text-align: center;
+      color: var(--color-gray-400);
+    }
+    
+    .footer-bottom a {
+      color: var(--color-gray-300);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: flex;
+      }
+      
+      .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        width: 100%;
+        background: var(--color-white);
+        flex-direction: column;
+        padding: var(--space-6);
+        box-shadow: var(--shadow-lg);
+        transition: left var(--transition-base);
+      }
+      
+      .nav-menu.active {
+        left: 0;
+      }
+    }
+  </style>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { getApplications, updateApplicationStatus, deleteApplication, getClubs } from '/scripts/data.js';
+    import { getCurrentUser, setCurrentUser, getNextStatus } from '/scripts/state.js';
+    import { validateEmail } from '/scripts/validators.js';
+    import { showToast, showModal, formatDate, showEmptyState } from '/scripts/ui.js';
+    
+    let currentApplications = [];
+    let currentEmail = '';
+    
+    // Mobile menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    navToggle?.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      const spans = navToggle.querySelectorAll('span');
+      spans[0].style.transform = navMenu.classList.contains('active') ? 'rotate(45deg) translateY(6px)' : '';
+      spans[1].style.opacity = navMenu.classList.contains('active') ? '0' : '1';
+      spans[2].style.transform = navMenu.classList.contains('active') ? 'rotate(-45deg) translateY(-6px)' : '';
+    });
+    
+    // Load applications
+    async function loadApplications(email) {
+      const container = document.getElementById('applicationsContainer');
+      const statsGrid = document.getElementById('statsGrid');
+      const demoBanner = document.getElementById('demoBanner');
+      
+      try {
+        currentApplications = await getApplications(email);
+        
+        if (currentApplications.length === 0) {
+          statsGrid.classList.add('hidden');
+          demoBanner.classList.add('hidden');
+          showEmptyState(container, {
+            title: 'No Applications Found',
+            message: 'You haven\'t submitted any applications yet.',
+            icon: '📝',
+            action: {
+              text: 'Browse Clubs',
+              handler: () => window.location.href = '/pages/clubs.html'
+            }
+          });
+          return;
+        }
+        
+        // Show stats and demo banner
+        statsGrid.classList.remove('hidden');
+        demoBanner.classList.remove('hidden');
+        updateStats();
+        
+        // Display applications
+        container.innerHTML = currentApplications.map(app => `
+          <div class="application-card" data-id="${app.id}">
+            <div class="application-header">
+              <div>
+                <h3 class="application-title">${app.clubName}</h3>
+                <div class="application-meta">
+                  <span class="application-meta-item">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+                    </svg>
+                    Submitted: ${formatDate(app.submittedAt)}
+                  </span>
+                  <span class="application-meta-item">
+                    ID: ${app.id.substring(0, 10).toUpperCase()}
+                  </span>
+                </div>
+              </div>
+              <span class="status-pill status-${app.status.toLowerCase().replace(' ', '-')}">${app.status}</span>
+            </div>
+            
+            <div class="application-body">
+              <div class="application-details">
+                <div class="detail-item">
+                  <span class="detail-label">Applicant</span>
+                  <span class="detail-value">${app.applicant.name}</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Grade</span>
+                  <span class="detail-value">Grade ${app.applicant.grade}</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">Last Updated</span>
+                  <span class="detail-value">${app.updatedAt ? formatDate(app.updatedAt) : 'Not updated'}</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="application-actions">
+              <button class="btn btn-ghost" onclick="simulateStatus('${app.id}')">Simulate Status</button>
+              <button class="btn btn-secondary" onclick="viewClub('${app.clubId}')">View Club</button>
+              <button class="btn btn-ghost" style="color: var(--color-error)" onclick="withdrawApplication('${app.id}')">Withdraw</button>
+            </div>
+          </div>
+        `).join('');
+        
+      } catch (error) {
+        console.error('Error loading applications:', error);
+        showToast('Error loading applications', 'error');
+      }
+    }
+    
+    // Update statistics
+    function updateStats() {
+      const stats = {
+        total: currentApplications.length,
+        submitted: currentApplications.filter(a => a.status === 'Submitted').length,
+        review: currentApplications.filter(a => a.status === 'Under Review').length,
+        accepted: currentApplications.filter(a => a.status === 'Accepted').length,
+        rejected: currentApplications.filter(a => a.status === 'Rejected').length
+      };
+      
+      document.getElementById('statTotal').textContent = stats.total;
+      document.getElementById('statSubmitted').textContent = stats.submitted;
+      document.getElementById('statReview').textContent = stats.review;
+      document.getElementById('statAccepted').textContent = stats.accepted;
+      document.getElementById('statRejected').textContent = stats.rejected;
+    }
+    
+    // Simulate status change
+    window.simulateStatus = async function(applicationId) {
+      const app = currentApplications.find(a => a.id === applicationId);
+      if (!app) return;
+      
+      const nextStatus = getNextStatus(app.status);
+      
+      try {
+        await updateApplicationStatus(applicationId, nextStatus);
+        showToast(`Status updated to: ${nextStatus}`, 'success');
+        await loadApplications(currentEmail);
+      } catch (error) {
+        console.error('Error updating status:', error);
+        showToast('Failed to update status', 'error');
+      }
+    };
+    
+    // View club
+    window.viewClub = function(clubId) {
+      window.location.href = `/pages/club.html?id=${clubId}`;
+    };
+    
+    // Withdraw application
+    window.withdrawApplication = async function(applicationId) {
+      const confirmed = await showModal({
+        title: 'Withdraw Application',
+        message: 'Are you sure you want to withdraw this application? This action cannot be undone.',
+        confirmText: 'Withdraw',
+        cancelText: 'Cancel'
+      });
+      
+      if (!confirmed) return;
+      
+      try {
+        await deleteApplication(applicationId);
+        showToast('Application withdrawn successfully', 'success');
+        await loadApplications(currentEmail);
+      } catch (error) {
+        console.error('Error withdrawing application:', error);
+        showToast('Failed to withdraw application', 'error');
+      }
+    };
+    
+    // Handle email form submission
+    document.getElementById('emailForm')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const emailInput = document.getElementById('studentEmail');
+      const email = emailInput.value.trim();
+      
+      // Validate email
+      const validation = validateEmail(email);
+      if (!validation.isValid) {
+        showToast(validation.error, 'error');
+        return;
+      }
+      
+      currentEmail = email;
+      setCurrentUser({ email });
+      await loadApplications(email);
+    });
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check if user has email in session
+      const user = getCurrentUser();
+      if (user && user.email) {
+        document.getElementById('studentEmail').value = user.email;
+        currentEmail = user.email;
+        loadApplications(user.email);
+      }
+    });
+  </script>
+</body>
+</html>

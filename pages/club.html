@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">Club Details - ANSXtra</title>
+  <meta name="description" content="Learn more about this club at Amnuaysilpa School">
+  <link rel="icon" type="image/png" href="/public/logo.png">
+  <link rel="stylesheet" href="/styles/globals.css">
+  <style>
+    /* Breadcrumb */
+    .breadcrumb {
+      padding: var(--space-4) 0;
+      background: var(--color-gray-50);
+    }
+    
+    .breadcrumb-list {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .breadcrumb-item {
+      color: var(--color-gray-600);
+    }
+    
+    .breadcrumb-item a {
+      color: var(--color-purple);
+    }
+    
+    .breadcrumb-item::after {
+      content: '›';
+      margin-left: var(--space-2);
+      color: var(--color-gray-400);
+    }
+    
+    .breadcrumb-item:last-child::after {
+      display: none;
+    }
+    
+    .breadcrumb-item:last-child {
+      color: var(--color-gray-900);
+      font-weight: var(--font-medium);
+    }
+    
+    /* Club Hero */
+    .club-hero {
+      position: relative;
+      height: 400px;
+      background: var(--gradient-primary);
+      margin-bottom: var(--space-8);
+    }
+    
+    .club-hero-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.3;
+    }
+    
+    .club-hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.7));
+      display: flex;
+      align-items: flex-end;
+    }
+    
+    .club-hero-content {
+      padding: var(--space-12) 0 var(--space-8);
+      color: var(--color-white);
+      width: 100%;
+    }
+    
+    .club-hero-title {
+      font-size: var(--text-5xl);
+      margin-bottom: var(--space-3);
+      color: var(--color-white);
+    }
+    
+    .club-hero-badges {
+      display: flex;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+    
+    .club-hero-badge {
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      color: var(--color-white);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-full);
+      font-weight: var(--font-medium);
+    }
+    
+    /* Content Layout */
+    .club-content {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: var(--space-8);
+      margin-bottom: var(--space-12);
+    }
+    
+    /* Main Content */
+    .club-main {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+    
+    .content-section {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .section-title {
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-4);
+      color: var(--color-dark-blue);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    
+    .section-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--gradient-primary);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-white);
+    }
+    
+    .activity-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .activity-item {
+      padding: var(--space-3) 0;
+      padding-left: var(--space-8);
+      position: relative;
+      border-bottom: 1px solid var(--color-gray-200);
+    }
+    
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+    
+    .activity-item::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: var(--space-3);
+      width: 24px;
+      height: 24px;
+      background: var(--color-success-light);
+      color: var(--color-success-dark);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    
+    /* FAQ Section */
+    .faq-item {
+      border-bottom: 1px solid var(--color-gray-200);
+      padding: var(--space-4) 0;
+    }
+    
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    
+    .faq-question {
+      font-weight: var(--font-semibold);
+      color: var(--color-dark-blue);
+      margin-bottom: var(--space-2);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-2);
+    }
+    
+    .faq-question::before {
+      content: 'Q:';
+      color: var(--color-purple);
+      font-weight: var(--font-bold);
+    }
+    
+    .faq-answer {
+      color: var(--color-gray-600);
+      padding-left: var(--space-8);
+      line-height: var(--leading-relaxed);
+    }
+    
+    /* Sidebar */
+    .club-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+    
+    .sidebar-card {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .sidebar-title {
+      font-size: var(--text-lg);
+      font-weight: var(--font-bold);
+      margin-bottom: var(--space-4);
+      color: var(--color-dark-blue);
+    }
+    
+    .meeting-info {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    
+    .meeting-row {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+    }
+    
+    .meeting-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--color-purple);
+      flex-shrink: 0;
+    }
+    
+    .meeting-text {
+      flex: 1;
+    }
+    
+    .meeting-label {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-1);
+    }
+    
+    .meeting-value {
+      font-weight: var(--font-semibold);
+      color: var(--color-gray-900);
+    }
+    
+    .contact-card {
+      padding: var(--space-4);
+      background: var(--color-gray-50);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-3);
+    }
+    
+    .contact-card:last-child {
+      margin-bottom: 0;
+    }
+    
+    .contact-role {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-1);
+    }
+    
+    .contact-name {
+      font-weight: var(--font-semibold);
+      color: var(--color-gray-900);
+      margin-bottom: var(--space-1);
+    }
+    
+    .contact-email {
+      font-size: var(--text-sm);
+      color: var(--color-purple);
+      word-break: break-all;
+    }
+    
+    /* Apply Button */
+    .apply-section {
+      position: sticky;
+      bottom: 0;
+      background: var(--color-white);
+      padding: var(--space-4) 0;
+      box-shadow: 0 -4px 6px -1px rgb(0 0 0 / 0.1);
+      z-index: var(--z-sticky);
+    }
+    
+    .apply-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-4);
+    }
+    
+    .apply-text {
+      flex: 1;
+    }
+    
+    .apply-title {
+      font-weight: var(--font-bold);
+      margin-bottom: var(--space-1);
+    }
+    
+    .apply-subtitle {
+      font-size: var(--text-sm);
+      color: var(--color-gray-600);
+    }
+    
+    .apply-button {
+      min-width: 200px;
+    }
+    
+    /* Status Banner */
+    .status-banner {
+      background: var(--color-error-light);
+      color: var(--color-error-dark);
+      padding: var(--space-4);
+      text-align: center;
+      font-weight: var(--font-semibold);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-6);
+    }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .club-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .club-sidebar {
+        order: -1;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .club-hero {
+        height: 300px;
+      }
+      
+      .club-hero-title {
+        font-size: var(--text-3xl);
+      }
+      
+      .apply-container {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .apply-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-content">
+          <a href="/" class="nav-brand">
+            <img src="/public/logo.png" alt="Amnuaysilpa" class="nav-logo">
+            <span>ANSXtra</span>
+          </a>
+          <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <div class="nav-menu">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/pages/clubs.html" class="nav-link">Clubs</a>
+            <a href="/pages/applications.html" class="nav-link">My Applications</a>
+            <a href="/pages/about.html" class="nav-link">About</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+      <div class="container">
+        <ol class="breadcrumb-list">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/pages/clubs.html">Clubs</a></li>
+          <li class="breadcrumb-item" id="breadcrumbClub">Loading...</li>
+        </ol>
+      </div>
+    </nav>
+
+    <!-- Club Hero -->
+    <section class="club-hero">
+      <img id="clubHeroImage" src="" alt="" class="club-hero-image">
+      <div class="club-hero-overlay">
+        <div class="container">
+          <div class="club-hero-content">
+            <h1 id="clubHeroTitle" class="club-hero-title">Loading...</h1>
+            <div id="clubHeroBadges" class="club-hero-badges">
+              <!-- Badges will be loaded here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+      <div id="statusBanner" class="status-banner hidden">
+        This club is currently not accepting new applications
+      </div>
+      
+      <div class="club-content">
+        <!-- Main Column -->
+        <div class="club-main">
+          <!-- About Section -->
+          <section class="content-section">
+            <h2 class="section-title">
+              <span class="section-icon">📖</span>
+              About This Club
+            </h2>
+            <p id="clubDescription">Loading...</p>
+          </section>
+
+          <!-- Activities Section -->
+          <section class="content-section">
+            <h2 class="section-title">
+              <span class="section-icon">🎯</span>
+              What You'll Do
+            </h2>
+            <ul id="clubActivities" class="activity-list">
+              <!-- Activities will be loaded here -->
+            </ul>
+          </section>
+
+          <!-- FAQ Section -->
+          <section class="content-section">
+            <h2 class="section-title">
+              <span class="section-icon">❓</span>
+              Frequently Asked Questions
+            </h2>
+            <div id="clubFAQ">
+              <!-- FAQ items will be loaded here -->
+            </div>
+          </section>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="club-sidebar">
+          <!-- Meeting Info -->
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Meeting Information</h3>
+            <div class="meeting-info">
+              <div class="meeting-row">
+                <svg class="meeting-icon" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"/>
+                </svg>
+                <div class="meeting-text">
+                  <div class="meeting-label">Day</div>
+                  <div id="meetingDay" class="meeting-value">Loading...</div>
+                </div>
+              </div>
+              <div class="meeting-row">
+                <svg class="meeting-icon" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                </svg>
+                <div class="meeting-text">
+                  <div class="meeting-label">Time</div>
+                  <div id="meetingTime" class="meeting-value">Loading...</div>
+                </div>
+              </div>
+              <div class="meeting-row">
+                <svg class="meeting-icon" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                </svg>
+                <div class="meeting-text">
+                  <div class="meeting-label">Location</div>
+                  <div id="meetingLocation" class="meeting-value">Loading...</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contacts -->
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Contact Information</h3>
+            <div id="clubContacts">
+              <!-- Contacts will be loaded here -->
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- Apply Section -->
+    <section id="applySection" class="apply-section">
+      <div class="container">
+        <div class="apply-container">
+          <div class="apply-text">
+            <div class="apply-title">Ready to join?</div>
+            <div class="apply-subtitle">Submit your application now</div>
+          </div>
+          <a id="applyButton" href="#" class="btn btn-primary apply-button">Apply Now</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ANSXtra</h4>
+          <p>Amnuaysilpa School's extracurricular management portal</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/pages/clubs.html">Browse Clubs</a></li>
+            <li><a href="/pages/applications.html">My Applications</a></li>
+            <li><a href="/pages/about.html">About</a></li>
+            <li><a href="/pages/about.html#content-guide">Content Guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>Email: clubs@amnuaysilpa.ac.th</p>
+          <p>Phone: 02-XXX-XXXX</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Amnuaysilpa School. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Component Styles (reused) -->
+  <style>
+    /* Header */
+    .header {
+      background: var(--color-white);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .navbar {
+      padding: var(--space-4) 0;
+    }
+    
+    .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-weight: var(--font-bold);
+      font-size: var(--text-xl);
+      color: var(--color-dark-blue);
+      text-decoration: none;
+    }
+    
+    .nav-logo {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2);
+    }
+    
+    .nav-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--color-dark-blue);
+      transition: all var(--transition-fast);
+    }
+    
+    .nav-menu {
+      display: flex;
+      gap: var(--space-6);
+      align-items: center;
+    }
+    
+    .nav-link {
+      color: var(--color-gray-700);
+      font-weight: var(--font-medium);
+      transition: color var(--transition-fast);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+    }
+    
+    .nav-link:hover {
+      color: var(--color-purple);
+      text-decoration: none;
+    }
+    
+    .nav-link.active {
+      color: var(--color-purple);
+      background: var(--color-purple-light);
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--color-dark-blue);
+      color: var(--color-white);
+      padding: var(--space-12) 0 var(--space-6);
+      margin-top: auto;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-8);
+      margin-bottom: var(--space-8);
+    }
+    
+    .footer-section h4 {
+      color: var(--color-white);
+      margin-bottom: var(--space-3);
+    }
+    
+    .footer-section ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .footer-section a {
+      color: var(--color-gray-300);
+      transition: color var(--transition-fast);
+    }
+    
+    .footer-section a:hover {
+      color: var(--color-white);
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: var(--space-6);
+      text-align: center;
+      color: var(--color-gray-400);
+    }
+    
+    .footer-bottom a {
+      color: var(--color-gray-300);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: flex;
+      }
+      
+      .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        width: 100%;
+        background: var(--color-white);
+        flex-direction: column;
+        padding: var(--space-6);
+        box-shadow: var(--shadow-lg);
+        transition: left var(--transition-base);
+      }
+      
+      .nav-menu.active {
+        left: 0;
+      }
+    }
+  </style>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { getClubById } from '/scripts/data.js';
+    import { getQueryParam, showToast } from '/scripts/ui.js';
+    
+    let currentClub = null;
+    
+    // Mobile menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    navToggle?.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      const spans = navToggle.querySelectorAll('span');
+      spans[0].style.transform = navMenu.classList.contains('active') ? 'rotate(45deg) translateY(6px)' : '';
+      spans[1].style.opacity = navMenu.classList.contains('active') ? '0' : '1';
+      spans[2].style.transform = navMenu.classList.contains('active') ? 'rotate(-45deg) translateY(-6px)' : '';
+    });
+    
+    // Load club details
+    async function loadClubDetails() {
+      const clubId = getQueryParam('id');
+      
+      if (!clubId) {
+        showToast('No club specified', 'error');
+        window.location.href = '/pages/clubs.html';
+        return;
+      }
+      
+      try {
+        currentClub = await getClubById(clubId);
+        displayClubDetails();
+      } catch (error) {
+        console.error('Error loading club:', error);
+        showToast('Club not found', 'error');
+        setTimeout(() => {
+          window.location.href = '/pages/clubs.html';
+        }, 2000);
+      }
+    }
+    
+    // Display club details
+    function displayClubDetails() {
+      if (!currentClub) return;
+      
+      // Update page title
+      document.getElementById('pageTitle').textContent = `${currentClub.name} - ANSXtra`;
+      
+      // Breadcrumb
+      document.getElementById('breadcrumbClub').textContent = currentClub.name;
+      
+      // Hero section
+      const heroImage = document.getElementById('clubHeroImage');
+      heroImage.src = currentClub.image;
+      heroImage.alt = currentClub.name;
+      heroImage.onerror = () => { heroImage.style.display = 'none'; };
+      
+      document.getElementById('clubHeroTitle').textContent = currentClub.name;
+      
+      const badgesContainer = document.getElementById('clubHeroBadges');
+      badgesContainer.innerHTML = `
+        <span class="club-hero-badge">${currentClub.type}</span>
+        <span class="club-hero-badge">${currentClub.category}</span>
+        ${currentClub.acceptingApplications ? 
+          '<span class="club-hero-badge">✓ Accepting Applications</span>' : 
+          '<span class="club-hero-badge">✗ Not Accepting</span>'}
+      `;
+      
+      // Description
+      document.getElementById('clubDescription').textContent = currentClub.description;
+      
+      // Activities
+      const activitiesContainer = document.getElementById('clubActivities');
+      activitiesContainer.innerHTML = currentClub.whatYouDo.map(activity => `
+        <li class="activity-item">${activity}</li>
+      `).join('');
+      
+      // FAQ
+      const faqContainer = document.getElementById('clubFAQ');
+      if (currentClub.faq && currentClub.faq.length > 0) {
+        faqContainer.innerHTML = currentClub.faq.map(item => `
+          <div class="faq-item">
+            <div class="faq-question">${item.q}</div>
+            <div class="faq-answer">${item.a}</div>
+          </div>
+        `).join('');
+      } else {
+        faqContainer.innerHTML = '<p>No FAQ items available yet.</p>';
+      }
+      
+      // Meeting info
+      document.getElementById('meetingDay').textContent = currentClub.meeting.day;
+      document.getElementById('meetingTime').textContent = currentClub.meeting.time;
+      document.getElementById('meetingLocation').textContent = currentClub.meeting.location;
+      
+      // Contacts
+      const contactsContainer = document.getElementById('clubContacts');
+      contactsContainer.innerHTML = `
+        ${currentClub.contacts.leader ? `
+          <div class="contact-card">
+            <div class="contact-role">Club Leader</div>
+            <div class="contact-name">${currentClub.contacts.leader.name}</div>
+            <a href="mailto:${currentClub.contacts.leader.email}" class="contact-email">
+              ${currentClub.contacts.leader.email}
+            </a>
+          </div>
+        ` : ''}
+        ${currentClub.contacts.advisor ? `
+          <div class="contact-card">
+            <div class="contact-role">Faculty Advisor</div>
+            <div class="contact-name">${currentClub.contacts.advisor.name}</div>
+            <a href="mailto:${currentClub.contacts.advisor.email}" class="contact-email">
+              ${currentClub.contacts.advisor.email}
+            </a>
+          </div>
+        ` : ''}
+      `;
+      
+      // Apply section
+      const applySection = document.getElementById('applySection');
+      const applyButton = document.getElementById('applyButton');
+      const statusBanner = document.getElementById('statusBanner');
+      
+      if (currentClub.acceptingApplications) {
+        applyButton.href = `/pages/apply.html?id=${currentClub.id}`;
+        applyButton.textContent = 'Apply Now';
+        applyButton.classList.remove('btn-secondary');
+        applyButton.classList.add('btn-primary');
+        statusBanner.classList.add('hidden');
+      } else {
+        applySection.style.display = 'none';
+        statusBanner.classList.remove('hidden');
+      }
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      loadClubDetails();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leader Dashboard - ANSXtra</title>
+  <meta name="description" content="Club leader management dashboard">
+  <link rel="icon" type="image/png" href="/public/logo.png">
+  <link rel="stylesheet" href="/styles/globals.css">
+  <style>
+    /* Page Header */
+    .page-header {
+      background: var(--gradient-dark);
+      color: var(--color-white);
+      padding: var(--space-12) 0;
+      margin-bottom: var(--space-8);
+    }
+    
+    .page-header h1 {
+      color: var(--color-white);
+      margin-bottom: var(--space-3);
+    }
+    
+    .page-header p {
+      font-size: var(--text-lg);
+      opacity: 0.95;
+    }
+    
+    /* Tabs */
+    .tabs-container {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      margin-bottom: var(--space-8);
+      overflow: hidden;
+    }
+    
+    .tabs-header {
+      display: flex;
+      border-bottom: 2px solid var(--color-gray-200);
+      overflow-x: auto;
+    }
+    
+    .tab-button {
+      padding: var(--space-4) var(--space-6);
+      background: none;
+      border: none;
+      font-weight: var(--font-medium);
+      color: var(--color-gray-600);
+      cursor: pointer;
+      position: relative;
+      white-space: nowrap;
+      transition: all var(--transition-fast);
+    }
+    
+    .tab-button:hover {
+      color: var(--color-purple);
+      background: var(--color-gray-50);
+    }
+    
+    .tab-button.active {
+      color: var(--color-purple);
+    }
+    
+    .tab-button.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--color-purple);
+    }
+    
+    .tabs-content {
+      padding: var(--space-8);
+    }
+    
+    .tab-panel {
+      display: none;
+    }
+    
+    .tab-panel.active {
+      display: block;
+    }
+    
+    /* Placeholder Content */
+    .placeholder-section {
+      text-align: center;
+      padding: var(--space-12) var(--space-6);
+      background: var(--color-gray-50);
+      border-radius: var(--radius-lg);
+      border: 2px dashed var(--color-gray-300);
+    }
+    
+    .placeholder-icon {
+      font-size: 3rem;
+      margin-bottom: var(--space-4);
+      opacity: 0.5;
+    }
+    
+    .placeholder-title {
+      font-size: var(--text-xl);
+      color: var(--color-gray-700);
+      margin-bottom: var(--space-3);
+    }
+    
+    .placeholder-text {
+      color: var(--color-gray-500);
+      margin-bottom: var(--space-6);
+    }
+    
+    /* Table Placeholder */
+    .table-placeholder {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .table-placeholder th {
+      background: var(--color-gray-100);
+      padding: var(--space-3) var(--space-4);
+      text-align: left;
+      font-weight: var(--font-semibold);
+      color: var(--color-gray-700);
+      border-bottom: 2px solid var(--color-gray-200);
+    }
+    
+    .table-placeholder td {
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--color-gray-200);
+    }
+    
+    .table-placeholder tbody tr:hover {
+      background: var(--color-gray-50);
+    }
+    
+    .skeleton-row {
+      height: 20px;
+      background: var(--color-gray-200);
+      border-radius: var(--radius-sm);
+    }
+    
+    /* Stats Cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-6);
+      margin-bottom: var(--space-8);
+    }
+    
+    .stat-card {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--gradient-primary);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-white);
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-3);
+    }
+    
+    .stat-value {
+      font-size: var(--text-3xl);
+      font-weight: var(--font-bold);
+      color: var(--color-dark-blue);
+      margin-bottom: var(--space-1);
+    }
+    
+    .stat-label {
+      color: var(--color-gray-600);
+      font-size: var(--text-sm);
+    }
+    
+    /* Coming Soon Badge */
+    .coming-soon {
+      display: inline-block;
+      background: var(--color-warning-light);
+      color: var(--color-warning-dark);
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      font-size: var(--text-sm);
+      font-weight: var(--font-semibold);
+      margin-left: var(--space-2);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .tabs-header {
+        overflow-x: scroll;
+      }
+      
+      .tab-button {
+        padding: var(--space-3) var(--space-4);
+        font-size: var(--text-sm);
+      }
+      
+      .tabs-content {
+        padding: var(--space-4);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-content">
+          <a href="/" class="nav-brand">
+            <img src="/public/logo.png" alt="Amnuaysilpa" class="nav-logo">
+            <span>ANSXtra</span>
+          </a>
+          <button class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <div class="nav-menu">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/pages/clubs.html" class="nav-link">Clubs</a>
+            <a href="/pages/applications.html" class="nav-link">My Applications</a>
+            <a href="/pages/leader.html" class="nav-link active">Leader Dashboard</a>
+            <a href="/pages/about.html" class="nav-link">About</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <h1>Leader Dashboard <span class="coming-soon">Coming Soon</span></h1>
+        <p>Manage your club members, applications, and activities</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- Statistics -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">👥</div>
+          <div class="stat-value">--</div>
+          <div class="stat-label">Total Members</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📝</div>
+          <div class="stat-value">--</div>
+          <div class="stat-label">Pending Applications</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📅</div>
+          <div class="stat-value">--</div>
+          <div class="stat-label">Upcoming Meetings</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📢</div>
+          <div class="stat-value">--</div>
+          <div class="stat-label">Announcements</div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs-container">
+        <div class="tabs-header">
+          <button class="tab-button active" data-tab="roster">Club Roster</button>
+          <button class="tab-button" data-tab="applications">Applications</button>
+          <button class="tab-button" data-tab="meetings">Meetings</button>
+          <button class="tab-button" data-tab="announcements">Announcements</button>
+          <button class="tab-button" data-tab="settings">Settings</button>
+        </div>
+        
+        <div class="tabs-content">
+          <!-- Roster Tab -->
+          <div class="tab-panel active" id="roster">
+            <div class="placeholder-section">
+              <div class="placeholder-icon">👥</div>
+              <h3 class="placeholder-title">Club Roster Management</h3>
+              <p class="placeholder-text">View and manage your club members, track attendance, and export member lists.</p>
+              
+              <table class="table-placeholder" style="margin-top: var(--space-6);">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Grade</th>
+                    <th>Email</th>
+                    <th>Joined</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><div class="skeleton-row"></div></td>
+                    <td><div class="skeleton-row"></div></td>
+                    <td><div class="skeleton-row"></div></td>
+                    <td><div class="skeleton-row"></div></td>
+                    <td><div class="skeleton-row"></div></td>
+                    <td><div class="skeleton-row"></div></td>
+                  </tr>
+                  <tr>
+                    <td><div class="skeleton-row"></div></td>
+                    <td><div class="skeleton-row"></div></td>
+                    <td><div class="skeleton-row"></div></td>
+                    <td><div class="skeleton-row"></div></td>
+                    <td><div class="skeleton-row"></div></td>
+                    <td><div class="skeleton-row"></div></td>
+                  </tr>
+                  <tr>
+                    <td><div class="skeleton-row"></div></td>
+                    <td><div class="skeleton-row"></div></td>
+                    <td><div class="skeleton-row"></div></td>
+                    <td><div class="skeleton-row"></div></td>
+                    <td><div class="skeleton-row"></div></td>
+                    <td><div class="skeleton-row"></div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <!-- Applications Tab -->
+          <div class="tab-panel" id="applications">
+            <div class="placeholder-section">
+              <div class="placeholder-icon">📝</div>
+              <h3 class="placeholder-title">Application Review</h3>
+              <p class="placeholder-text">Review and process new member applications. Accept or reject applicants and send notifications.</p>
+              <button class="btn btn-primary" disabled>Review Applications</button>
+            </div>
+          </div>
+          
+          <!-- Meetings Tab -->
+          <div class="tab-panel" id="meetings">
+            <div class="placeholder-section">
+              <div class="placeholder-icon">📅</div>
+              <h3 class="placeholder-title">Meeting Schedule</h3>
+              <p class="placeholder-text">Schedule meetings, track attendance, and share meeting notes with members.</p>
+              <button class="btn btn-primary" disabled>Schedule Meeting</button>
+            </div>
+          </div>
+          
+          <!-- Announcements Tab -->
+          <div class="tab-panel" id="announcements">
+            <div class="placeholder-section">
+              <div class="placeholder-icon">📢</div>
+              <h3 class="placeholder-title">Club Announcements</h3>
+              <p class="placeholder-text">Post announcements, updates, and important information for your club members.</p>
+              <button class="btn btn-primary" disabled>Create Announcement</button>
+            </div>
+          </div>
+          
+          <!-- Settings Tab -->
+          <div class="tab-panel" id="settings">
+            <div class="placeholder-section">
+              <div class="placeholder-icon">⚙️</div>
+              <h3 class="placeholder-title">Club Settings</h3>
+              <p class="placeholder-text">Manage club information, meeting schedule, application settings, and member permissions.</p>
+              <button class="btn btn-primary" disabled>Edit Settings</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>ANSXtra</h4>
+          <p>Amnuaysilpa School's extracurricular management portal</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/pages/clubs.html">Browse Clubs</a></li>
+            <li><a href="/pages/applications.html">My Applications</a></li>
+            <li><a href="/pages/about.html">About</a></li>
+            <li><a href="/pages/about.html#content-guide">Content Guide</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>Email: clubs@amnuaysilpa.ac.th</p>
+          <p>Phone: 02-XXX-XXXX</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Amnuaysilpa School. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Component Styles (reused) -->
+  <style>
+    /* Header */
+    .header {
+      background: var(--color-white);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: var(--z-sticky);
+    }
+    
+    .navbar {
+      padding: var(--space-4) 0;
+    }
+    
+    .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-weight: var(--font-bold);
+      font-size: var(--text-xl);
+      color: var(--color-dark-blue);
+      text-decoration: none;
+    }
+    
+    .nav-logo {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-2);
+    }
+    
+    .nav-toggle span {
+      width: 24px;
+      height: 2px;
+      background: var(--color-dark-blue);
+      transition: all var(--transition-fast);
+    }
+    
+    .nav-menu {
+      display: flex;
+      gap: var(--space-6);
+      align-items: center;
+    }
+    
+    .nav-link {
+      color: var(--color-gray-700);
+      font-weight: var(--font-medium);
+      transition: color var(--transition-fast);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+    }
+    
+    .nav-link:hover {
+      color: var(--color-purple);
+      text-decoration: none;
+    }
+    
+    .nav-link.active {
+      color: var(--color-purple);
+      background: var(--color-purple-light);
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--color-dark-blue);
+      color: var(--color-white);
+      padding: var(--space-12) 0 var(--space-6);
+      margin-top: auto;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--space-8);
+      margin-bottom: var(--space-8);
+    }
+    
+    .footer-section h4 {
+      color: var(--color-white);
+      margin-bottom: var(--space-3);
+    }
+    
+    .footer-section ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .footer-section a {
+      color: var(--color-gray-300);
+      transition: color var(--transition-fast);
+    }
+    
+    .footer-section a:hover {
+      color: var(--color-white);
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: var(--space-6);
+      text-align: center;
+      color: var(--color-gray-400);
+    }
+    
+    .footer-bottom a {
+      color: var(--color-gray-300);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: flex;
+      }
+      
+      .nav-menu {
+        position: fixed;
+        top: 60px;
+        left: -100%;
+        width: 100%;
+        background: var(--color-white);
+        flex-direction: column;
+        padding: var(--space-6);
+        box-shadow: var(--shadow-lg);
+        transition: left var(--transition-base);
+      }
+      
+      .nav-menu.active {
+        left: 0;
+      }
+    }
+  </style>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    navToggle?.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      const spans = navToggle.querySelectorAll('span');
+      spans[0].style.transform = navMenu.classList.contains('active') ? 'rotate(45deg) translateY(6px)' : '';
+      spans[1].style.opacity = navMenu.classList.contains('active') ? '0' : '1';
+      spans[2].style.transform = navMenu.classList.contains('active') ? 'rotate(-45deg) translateY(-6px)' : '';
+    });
+    
+    // Tab functionality
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+    
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetTab = button.dataset.tab;
+        
+        // Update active button
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        // Update active panel
+        tabPanels.forEach(panel => {
+          panel.classList.remove('active');
+          if (panel.id === targetTab) {
+            panel.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
