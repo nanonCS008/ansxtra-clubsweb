@@ -1,0 +1,330 @@
+[
+  {
+    "id": "mun",
+    "name": "Model United Nations",
+    "type": "Student-led",
+    "category": "Global Citizenship",
+    "image": "/clubs/mun.jpg",
+    "description": "Debate global issues, practice diplomacy, and develop leadership skills in our award-winning MUN club.",
+    "whatYouDo": [
+      "Weekly debates on current global issues and position papers",
+      "Conference preparation workshops and public speaking training",
+      "Participate in national and international MUN conferences",
+      "Research and represent different countries' perspectives"
+    ],
+    "meeting": {
+      "day": "Wednesday",
+      "time": "15:30–17:00",
+      "location": "Room C301"
+    },
+    "contacts": {
+      "leader": {
+        "name": "Jane Doe",
+        "email": "jane.doe@student.amnuaysilpa.ac.th"
+      },
+      "advisor": {
+        "name": "Mr. Somchai Tanaka",
+        "email": "somchai.tanaka@amnuaysilpa.ac.th"
+      }
+    },
+    "acceptingApplications": true,
+    "faq": [
+      {
+        "q": "Do I need previous MUN experience?",
+        "a": "No! We welcome beginners and provide comprehensive training for new delegates."
+      },
+      {
+        "q": "What's the time commitment?",
+        "a": "Weekly meetings plus occasional weekend conferences (2-3 per semester)."
+      },
+      {
+        "q": "Are there any costs involved?",
+        "a": "Conference fees are partially subsidized by the school. Delegates contribute approximately 2,000 THB per conference."
+      }
+    ]
+  },
+  {
+    "id": "eco-committee",
+    "name": "Eco Committee",
+    "type": "Teacher-run",
+    "category": "Sustainability",
+    "image": "/clubs/eco.jpg",
+    "description": "Lead environmental initiatives and make our school more sustainable through hands-on projects and campaigns.",
+    "whatYouDo": [
+      "Organize campus-wide recycling and waste reduction programs",
+      "Maintain the school garden and composting system",
+      "Plan Earth Day celebrations and environmental awareness campaigns",
+      "Collaborate with local environmental organizations"
+    ],
+    "meeting": {
+      "day": "Tuesday",
+      "time": "15:30–16:30",
+      "location": "Room B203"
+    },
+    "contacts": {
+      "leader": {
+        "name": "Ms. Siriporn Chen",
+        "email": "siriporn.chen@amnuaysilpa.ac.th"
+      },
+      "advisor": {
+        "name": "Dr. Prasert Kumar",
+        "email": "prasert.kumar@amnuaysilpa.ac.th"
+      }
+    },
+    "acceptingApplications": true,
+    "faq": [
+      {
+        "q": "Can I join if I'm new to environmental issues?",
+        "a": "Absolutely! We provide education and training for all members regardless of experience."
+      },
+      {
+        "q": "Do we work outside of school hours?",
+        "a": "Most activities are during club time, but we have optional weekend community projects."
+      }
+    ]
+  },
+  {
+    "id": "spark",
+    "name": "SPARK Community Service",
+    "type": "Teacher-run",
+    "category": "Community",
+    "image": "/clubs/spark.jpg",
+    "description": "Ignite positive change in our community through meaningful service projects and volunteer opportunities.",
+    "whatYouDo": [
+      "Visit local orphanages and elderly care centers monthly",
+      "Organize donation drives for underprivileged communities",
+      "Tutor primary school students in nearby schools",
+      "Plan and execute community development projects"
+    ],
+    "meeting": {
+      "day": "Thursday",
+      "time": "15:30–16:30",
+      "location": "Library"
+    },
+    "contacts": {
+      "leader": {
+        "name": "Mr. Nattapong Williams",
+        "email": "nattapong.williams@amnuaysilpa.ac.th"
+      },
+      "advisor": {
+        "name": "Ms. Kanchana Park",
+        "email": "kanchana.park@amnuaysilpa.ac.th"
+      }
+    },
+    "acceptingApplications": true,
+    "faq": [
+      {
+        "q": "How often do we do community visits?",
+        "a": "We organize field visits twice a month, usually on Saturdays."
+      },
+      {
+        "q": "Can I get CAS hours from this club?",
+        "a": "Yes! All our activities count towards your CAS requirements."
+      }
+    ]
+  },
+  {
+    "id": "duke-of-edinburgh",
+    "name": "Duke of Edinburgh International Award",
+    "type": "Teacher-run",
+    "category": "Leadership",
+    "image": "/clubs/dofe.jpg",
+    "description": "Challenge yourself through adventurous expeditions, skill development, and community service to earn an internationally recognized award.",
+    "whatYouDo": [
+      "Train for and complete adventurous journeys and expeditions",
+      "Develop new skills in areas of personal interest",
+      "Engage in regular physical recreation activities",
+      "Contribute to community service projects"
+    ],
+    "meeting": {
+      "day": "Friday",
+      "time": "16:00–17:00",
+      "location": "Gym Classroom"
+    },
+    "contacts": {
+      "leader": {
+        "name": "Mr. David Thompson",
+        "email": "david.thompson@amnuaysilpa.ac.th"
+      },
+      "advisor": {
+        "name": "Ms. Sujitra Lee",
+        "email": "sujitra.lee@amnuaysilpa.ac.th"
+      }
+    },
+    "acceptingApplications": false,
+    "faq": [
+      {
+        "q": "What are the age requirements?",
+        "a": "Bronze Award: 14+, Silver Award: 15+, Gold Award: 16+"
+      },
+      {
+        "q": "How long does it take to complete?",
+        "a": "Bronze: 6 months minimum, Silver: 12 months, Gold: 18 months"
+      },
+      {
+        "q": "Are there additional costs?",
+        "a": "Yes, expedition costs and registration fees apply (approximately 5,000-8,000 THB per level)."
+      }
+    ]
+  },
+  {
+    "id": "moot-court",
+    "name": "Moot Court",
+    "type": "Teacher-run",
+    "category": "Debate/Law",
+    "image": "/clubs/moot.jpg",
+    "description": "Experience the legal world through mock trials, legal debates, and courtroom simulations.",
+    "whatYouDo": [
+      "Prepare and argue legal cases in mock trial settings",
+      "Learn about Thai and international legal systems",
+      "Develop critical thinking and public speaking skills",
+      "Compete in inter-school moot court competitions"
+    ],
+    "meeting": {
+      "day": "Monday",
+      "time": "16:00–17:00",
+      "location": "Room A110"
+    },
+    "contacts": {
+      "leader": {
+        "name": "Ms. Pimchanok Singh",
+        "email": "pimchanok.singh@amnuaysilpa.ac.th"
+      },
+      "advisor": {
+        "name": "Mr. Arthit Johnson",
+        "email": "arthit.johnson@amnuaysilpa.ac.th"
+      }
+    },
+    "acceptingApplications": true,
+    "faq": [
+      {
+        "q": "Do I need to want to be a lawyer to join?",
+        "a": "Not at all! The skills you learn here apply to many careers."
+      },
+      {
+        "q": "How competitive is it to get in?",
+        "a": "We accept students who show genuine interest and commitment, regardless of experience."
+      }
+    ]
+  },
+  {
+    "id": "interact",
+    "name": "Interact Club",
+    "type": "Student-led",
+    "category": "Service",
+    "image": "/clubs/interact.jpg",
+    "description": "Join Rotary International's youth network to develop leadership skills while serving your community.",
+    "whatYouDo": [
+      "Plan and execute community service projects",
+      "Collaborate with local Rotary clubs on initiatives",
+      "Participate in international Interact conferences",
+      "Develop leadership through hands-on project management"
+    ],
+    "meeting": {
+      "day": "Tuesday",
+      "time": "16:00–17:00",
+      "location": "Room A205"
+    },
+    "contacts": {
+      "leader": {
+        "name": "Michael Chang",
+        "email": "michael.chang@student.amnuaysilpa.ac.th"
+      },
+      "advisor": {
+        "name": "Mr. Wichai Patel",
+        "email": "wichai.patel@amnuaysilpa.ac.th"
+      }
+    },
+    "acceptingApplications": true,
+    "faq": [
+      {
+        "q": "What's the difference between Interact and other service clubs?",
+        "a": "Interact is part of Rotary International, giving us access to a global network and resources."
+      },
+      {
+        "q": "Are there membership fees?",
+        "a": "Yes, there's a small annual fee of 500 THB to cover materials and activities."
+      }
+    ]
+  },
+  {
+    "id": "operation-smile",
+    "name": "Operation Smile",
+    "type": "Student-led",
+    "category": "Service/Health",
+    "image": "/clubs/opsmile.jpg",
+    "description": "Support the global mission to provide free surgeries for children with cleft conditions through fundraising and awareness.",
+    "whatYouDo": [
+      "Organize fundraising events for surgical missions",
+      "Create awareness campaigns about cleft conditions",
+      "Volunteer at Operation Smile Thailand events",
+      "Coordinate with hospitals and medical professionals"
+    ],
+    "meeting": {
+      "day": "Thursday",
+      "time": "16:00–17:00",
+      "location": "Room B105"
+    },
+    "contacts": {
+      "leader": {
+        "name": "Sarah Kim",
+        "email": "sarah.kim@student.amnuaysilpa.ac.th"
+      },
+      "advisor": {
+        "name": "Ms. Naree Martinez",
+        "email": "naree.martinez@amnuaysilpa.ac.th"
+      }
+    },
+    "acceptingApplications": true,
+    "faq": [
+      {
+        "q": "Do we get to meet the children we help?",
+        "a": "Yes! We visit partner hospitals and participate in mission events when possible."
+      },
+      {
+        "q": "What kind of fundraising do we do?",
+        "a": "Bake sales, charity concerts, sponsored walks, and our annual gala dinner."
+      }
+    ]
+  },
+  {
+    "id": "unicef-ambassadors",
+    "name": "UNICEF Ambassadors",
+    "type": "Student-led",
+    "category": "Global Citizenship",
+    "image": "/clubs/unicef.jpg",
+    "description": "Advocate for children's rights and support UNICEF's mission through awareness campaigns and fundraising initiatives.",
+    "whatYouDo": [
+      "Organize campaigns for children's rights awareness",
+      "Fundraise for UNICEF programs in Thailand and globally",
+      "Participate in UNICEF youth forums and conferences",
+      "Create educational content about global children's issues"
+    ],
+    "meeting": {
+      "day": "Friday",
+      "time": "15:30–16:30",
+      "location": "Room C210"
+    },
+    "contacts": {
+      "leader": {
+        "name": "Emma Rodriguez",
+        "email": "emma.rodriguez@student.amnuaysilpa.ac.th"
+      },
+      "advisor": {
+        "name": "Mr. Thanawat Brown",
+        "email": "thanawat.brown@amnuaysilpa.ac.th"
+      }
+    },
+    "acceptingApplications": true,
+    "faq": [
+      {
+        "q": "How do we work with UNICEF Thailand?",
+        "a": "We're officially registered as a UNICEF youth group and receive support from their Bangkok office."
+      },
+      {
+        "q": "Can I join if I'm not fluent in English?",
+        "a": "Yes! We work in both Thai and English depending on the project."
+      }
+    ]
+  }
+]
