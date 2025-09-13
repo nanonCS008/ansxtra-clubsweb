@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Brand Colors */
+  --color-pink: #D946EF;
+  --color-purple: #7C3AED;
+  --color-blue: #3B82F6;
+  --color-dark-blue: #0F172A;
+}
+
+@layer base {
+  body {
+    @apply text-gray-900 bg-white;
+  }
+  
+  h1 {
+    @apply text-4xl font-bold text-slate-900 mb-6;
+  }
+  
+  h2 {
+    @apply text-3xl font-bold text-slate-900 mb-5;
+  }
+  
+  h3 {
+    @apply text-2xl font-bold text-slate-900 mb-4;
+  }
+  
+  p {
+    @apply mb-4 leading-relaxed;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold rounded-lg 
+           transition-all duration-200 cursor-pointer no-underline min-h-[44px]
+           focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-md
+           hover:shadow-lg hover:-translate-y-0.5 disabled:hover:translate-y-0;
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-purple-600 border-2 border-purple-600
+           hover:bg-purple-600 hover:text-white;
+  }
+  
+  .btn-ghost {
+    @apply bg-transparent text-gray-700 hover:bg-gray-100;
+  }
+  
+  .status-pill {
+    @apply inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold 
+           rounded-full uppercase tracking-wider;
+  }
+  
+  .status-pill::before {
+    content: '';
+    @apply w-2 h-2 rounded-full bg-current;
+  }
+  
+  .status-submitted {
+    @apply bg-blue-100 text-blue-800;
+  }
+  
+  .status-under-review {
+    @apply bg-yellow-100 text-yellow-800;
+  }
+  
+  .status-accepted {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .status-rejected {
+    @apply bg-red-100 text-red-800;
+  }
+  
+  .card {
+    @apply bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300;
+  }
+  
+  .gradient-primary {
+    @apply bg-gradient-to-r from-pink-500 to-purple-600;
+  }
+  
+  .gradient-hero {
+    @apply bg-gradient-to-br from-pink-400 via-purple-500 to-blue-500;
+  }
+  
+  .gradient-dark {
+    @apply bg-gradient-to-r from-slate-900 to-purple-900;
+  }
+}
+
+@layer utilities {
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+}
