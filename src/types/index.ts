@@ -12,11 +12,11 @@ export interface Club {
     location: string
   }
   contacts: {
-    leader: {
+    leader?: {
       name: string
       email: string
     }
-    advisor: {
+    advisor?: {
       name: string
       email: string
     }
@@ -31,36 +31,20 @@ export interface Club {
 export interface Application {
   id: string
   clubId: string
-  clubName: string
-  studentName: string
-  studentEmail: string
-  studentId: string
-  grade: string
-  motivation: string
-  experience: string
-  commitment: string
-  status: 'submitted' | 'under-review' | 'accepted' | 'rejected'
+  clubName?: string
+  applicant: {
+    name: string
+    grade: string
+    email: string
+  }
+  answers: {
+    motivation: string
+    experience?: string
+    availability: string[]
+  }
   submittedAt: string
-  updatedAt: string
-}
-
-export interface FilterOptions {
-  search: string
-  day: string
-  type: string
-  category: string
-  accepting: string
-}
-
-export interface FormErrors {
-  [key: string]: string
-}
-
-export interface ToastMessage {
-  id: string
-  type: 'success' | 'error' | 'info'
-  message: string
-  duration?: number
+  updatedAt?: string
+  status: 'Submitted' | 'Under Review' | 'Accepted' | 'Rejected'
 }
 
 export interface User {

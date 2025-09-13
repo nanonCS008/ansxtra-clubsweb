@@ -11,7 +11,6 @@ import {
   MessageSquare, 
   Settings,
   Mail,
-  Phone,
   CheckCircle,
   XCircle,
   Clock

@@ -87,15 +87,16 @@ export default function ApplicationPage() {
     try {
       const applicationData = {
         clubId: club.id,
-        clubName: club.name,
-        studentName: data.studentName,
-        studentEmail: data.studentEmail,
-        studentId: data.studentId,
-        grade: data.grade,
-        motivation: data.motivation,
-        experience: data.experience,
-        commitment: data.commitment,
-        status: 'submitted' as const,
+        applicant: {
+          name: data.studentName,
+          email: data.studentEmail,
+          grade: data.grade,
+        },
+        answers: {
+          motivation: data.motivation,
+          experience: data.experience,
+          availability: [club.meeting.day],
+        },
       }
 
       await createApplication(applicationData)

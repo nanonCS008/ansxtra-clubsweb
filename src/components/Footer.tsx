@@ -18,7 +18,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/applications" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/me" className="text-gray-300 hover:text-white transition-colors">
                   My Applications
                 </Link>
               </li>

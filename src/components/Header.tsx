@@ -55,9 +55,9 @@ export default function Header() {
               Clubs
             </Link>
             <Link 
-              href="/applications" 
+              href="/me" 
               className={`font-medium px-3 py-2 rounded-lg transition-colors ${
-                isActive('/applications') ? 'text-purple-600 bg-purple-100' : 'text-gray-700 hover:text-purple-600'
+                isActive('/me') ? 'text-purple-600 bg-purple-100' : 'text-gray-700 hover:text-purple-600'
               }`}
             >
               My Applications
@@ -96,9 +96,9 @@ export default function Header() {
                 Clubs
               </Link>
               <Link 
-                href="/applications" 
+                href="/me" 
                 className={`font-medium px-3 py-2 rounded-lg transition-colors ${
-                  isActive('/applications') ? 'text-purple-600 bg-purple-100' : 'text-gray-700'
+                  isActive('/me') ? 'text-purple-600 bg-purple-100' : 'text-gray-700'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >

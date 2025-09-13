@@ -119,11 +119,11 @@ export default function AboutPage() {
                 </h3>
                 <div className="bg-white rounded-lg p-6 border border-gray-200">
                   <p className="text-gray-600 mb-4">
-                    All club information is stored in the <code className="bg-gray-100 px-2 py-1 rounded text-sm">data/clubs.json</code> file. 
+                    All club information is stored in the <code className="bg-gray-100 px-2 py-1 rounded text-sm">public/data/clubs.json</code> file. 
                     To update club details:
                   </p>
                   <ol className="list-decimal list-inside space-y-2 text-gray-600 mb-4">
-                    <li>Open the <code className="bg-gray-100 px-2 py-1 rounded text-sm">data/clubs.json</code> file</li>
+                    <li>Open the <code className="bg-gray-100 px-2 py-1 rounded text-sm">public/data/clubs.json</code> file</li>
                     <li>Find the club object you want to modify</li>
                     <li>Update the relevant fields (name, description, meeting info, etc.)</li>
                     <li>Save the file - changes will be reflected immediately</li>
@@ -156,31 +156,6 @@ export default function AboutPage() {
                     <p className="text-green-800 text-sm">
                       <strong>Recommended:</strong> Use high-quality images with a 16:9 aspect ratio 
                       for best display results. Optimize images for web to ensure fast loading.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-semibold mb-4 flex items-center gap-3">
-                  <Upload className="w-6 h-6 text-green-600" />
-                  Adding New Clubs
-                </h3>
-                <div className="bg-white rounded-lg p-6 border border-gray-200">
-                  <p className="text-gray-600 mb-4">
-                    To add a new club to the system:
-                  </p>
-                  <ol className="list-decimal list-inside space-y-2 text-gray-600 mb-4">
-                    <li>Create a unique ID for the club (lowercase, hyphen-separated)</li>
-                    <li>Add the club image to <code className="bg-gray-100 px-2 py-1 rounded text-sm">public/clubs/</code></li>
-                    <li>Copy an existing club object in <code className="bg-gray-100 px-2 py-1 rounded text-sm">clubs.json</code></li>
-                    <li>Update all fields with the new club's information</li>
-                    <li>Ensure the club appears in the array and the JSON remains valid</li>
-                  </ol>
-                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-                    <p className="text-yellow-800 text-sm">
-                      <strong>Important:</strong> The club ID must be unique and match the filename 
-                      pattern used in the image path.
                     </p>
                   </div>
                 </div>
@@ -227,12 +202,12 @@ export default function AboutPage() {
               don't hesitate to reach out.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild>
+              <Button>
                 <a href="mailto:clubs@amnuaysilpa.ac.th">
                   Contact Support
                 </a>
               </Button>
-              <Button variant="secondary" asChild>
+              <Button variant="secondary">
                 <Link href="/clubs">
                   Browse Clubs
                 </Link>

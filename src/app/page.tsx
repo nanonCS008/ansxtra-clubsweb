@@ -135,7 +135,7 @@ export default function HomePage() {
             <Link href="/clubs" className="btn bg-white text-purple-600 hover:bg-gray-100">
               Browse Clubs
             </Link>
-            <Link href="/applications" className="btn btn-primary">
+            <Link href="/me" className="btn btn-primary">
               Track Applications
             </Link>
           </div>

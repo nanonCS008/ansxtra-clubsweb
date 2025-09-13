@@ -8,12 +8,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'md' | 'lg'
   loading?: boolean
   children: React.ReactNode
+  asChild?: boolean
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', loading, disabled, children, ...props }, ref) => {
+  ({ className, variant = 'primary', size = 'md', loading, disabled, children, asChild, ...props }, ref) => {
+    const Component = asChild ? 'span' : 'button'
+    
     return (
-      <button
+      <Component
         className={clsx(
           // Base styles
           'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200',
@@ -75,7 +78,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           </svg>
         )}
         {children}
-      </button>
+      </Component>
     )
   }
 )
