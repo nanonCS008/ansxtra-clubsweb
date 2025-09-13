@@ -202,16 +202,16 @@ export default function AboutPage() {
               don't hesitate to reach out.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button>
-                <a href="mailto:clubs@amnuaysilpa.ac.th">
+              <a href="mailto:clubs@amnuaysilpa.ac.th">
+                <Button>
                   Contact Support
-                </a>
-              </Button>
-              <Button variant="secondary">
-                <Link href="/clubs">
+                </Button>
+              </a>
+              <Link href="/clubs">
+                <Button variant="secondary">
                   Browse Clubs
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </div>
           </section>
         </div>
